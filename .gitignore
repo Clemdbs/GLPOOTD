@@ -1,2 +1,14 @@
-.idea/
-venv/
+**/.idea/*
+*.pyc
+*.egg-info
+venv/*
+.cache/*
+*.log
+.coverage
+.pytest_cache/
+.vscode/
+*.whl
+*.tar.gz
+*.zip
+*.db
+
