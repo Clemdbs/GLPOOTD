@@ -1,0 +1,4 @@
+La gestion de création de compte n'est en aucun cas parfaite.
+À noter que la fenetre d'inscription se faire pour toute erreur. Cela sera gérer plus tard.
+De plus, la connection sera également gérée plus tard.
+La gestion de musique arrive également plus tard.

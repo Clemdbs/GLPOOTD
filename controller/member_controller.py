@@ -26,8 +26,7 @@ class MemberController:
         return member_data
 
     def create_member(self, data):
-
-        self._check_profile_data(data)
+        self.check_data(data)
         try:
             with self._database_engine.new_session() as session:
                 # Save member in database
@@ -39,8 +38,6 @@ class MemberController:
             raise e
 
     def update_member(self, member_id, member_data):
-
-        self._check_profile_data(member_data, update=True)
         with self._database_engine.new_session() as session:
             member_dao = MemberDAO(session)
             member = member_dao.get(member_id)
@@ -48,39 +45,42 @@ class MemberController:
             return member.to_dict()
 
     def delete_member(self, member_id):
-
         with self._database_engine.new_session() as session:
             member_dao = MemberDAO(session)
             member = member_dao.get(member_id)
             member_dao.delete(member)
 
-    def search_member(self, firstname, lastname):
-
+    def search_member(self, email):
         # Query database
         with self._database_engine.new_session() as session:
             member_dao = MemberDAO(session)
-            member = member_dao.get_by_name(firstname, lastname)
+            member = member_dao.get_by_email(email)
             return member.to_dict()
 
-    def _check_profile_data(self, data, update=False):
-        name_pattern = re.compile("^[\S-]{2,50}$")
-        type_pattern = re.compile("^(customer|seller)$")
-        email_pattern = re.compile("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
-        mandatories = {
-            'firstname': {"type": str, "regex": name_pattern},
-            'lastname': {"type": str, "regex": name_pattern},
-            'email': {"type": str, "regex": email_pattern},
-            'type': {"type": str, "regex": type_pattern}
-        }
-        for mandatory, specs in mandatories.items():
-            if not update:
-                if mandatory not in data or data[mandatory] is None:
-                    raise InvalidData("Missing value %s" % mandatory)
-            else:
-                if mandatory not in data:
-                    continue
-            value = data[mandatory]
-            if "type" in specs and not isinstance(value, specs["type"]):
-                raise InvalidData("Invalid type %s" % mandatory)
-            if "regex" in specs and isinstance(value, str) and not re.match(specs["regex"], value):
-                raise InvalidData("Invalid value %s" % mandatory)
+    def check_data(self, data):
+        email = data[0]
+        pseudo = data[1]
+        mot_de_passe = data[2]
+        sexe = data[3]
+        pays = data[4]
+
+        #Test du remplissage :
+        if email == "" or email == "Adresse mail" or pseudo == "" or pseudo == "Pseudo" or mot_de_passe == "Mot de passe" or sexe == "Sexe" or pays == "Pays":
+            return 'Veuillez remplir tous les champs'
+
+        #Test du mail :
+        if "@" not in email:
+            return 'Votre adresse mail n\'est pas valide'
+        indice = email.index('@')
+        analyse = email[indice:]
+        if "." not in analyse:
+            return 'Votre adresse mail n\'est pas valide'
+
+        #Test du mot de passe :
+        # On ne veut pas d'espace dans le mot de passe
+        if " " in mot_de_passe:
+            return 'Votre mot de passe ne peut pas avoir d\'espace... !'
+        # Tout d'abord, si le mot de passe à une longueur inférieure à 6 (pour une sécurité)
+        if len(mot_de_passe) < 6:
+            return 'Votre mot de passe doit au minimum contenir 6 caractères !'
+        return True

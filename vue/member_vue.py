@@ -11,26 +11,25 @@ class MemberVue:
         self._common = Common()
         self._member_controller = member_controller
 
-    def add_member(self, user_type):
+    def add_member(self, informations):
         # Show subscription formular
         data = {}
-        print("Store user Subscription")
-        print(user_type)
+        print("Spotify user information")
+        print(informations)
         print()
-        data['firstname'] = self._common.ask_name(key_name="firstname")
-        data['lastname'] = self._common.ask_name(key_name="lastname")
-        data['email'] = self._common.ask_email()
-        if user_type != 'customer':
-            data['type'] = self._common.ask_type()
-        else:
-            data['type'] = user_type
+        data['email'] = informations[0]
+        data['pseudo'] = informations[1]
+        data['mot_de_passe'] = informations[2]
+        data['sexe'] = informations[3]
+        data['pays'] = informations[4]
         return self._member_controller.create_member(data)
 
     def show_member(self, member: dict):
         print("Member profile: ")
-        print(member['firstname'].capitalize(), member['lastname'].capitalize())
-        print("email:", member['email'])
-        print("type:", member['type'])
+        print("email :", member['email'], " et pseudo : ", member['pseudo'])
+        print("mot_de_passe:", member['mot_de_passe'])
+        print("sexe:", member['sexe'])
+        print("pays:", member['pays'])
 
     def error_message(self, message: str):
         print("/!\\ %s" % message.upper())
@@ -44,10 +43,10 @@ class MemberVue:
 
         print("Members: ")
         for member in members:
-            print("* %s %s (%s) - %s" % (   member['firstname'].capitalize(),
-                                            member['lastname'].capitalize(),
-                                            member['email'],
-                                            member['type']))
+            print("* %s %s (%s) - %s" % (   member['email'],
+                                            member['pseudo'],
+                                            member['sexe'],
+                                            member['pays']))
 
     def search_member(self):
         firstname = self._common.ask_name('firstname')
