@@ -61,6 +61,7 @@ class Ui_Dialog(MemberVue):
         #Ici, on va faire en sorte que le programme exécute une fonction s'il clique sur "ok"
         self.buttonBox.accepted.connect(lambda: self.creation_du_compte(Dialog))
 
+
         self.buttonBox.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 

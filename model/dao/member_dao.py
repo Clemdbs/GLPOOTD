@@ -43,6 +43,7 @@ class MemberDAO(DAO):
             raise Error("Member already exists")
         return member
 
+    #C'est à faire !
     def update(self, member: Member, data: dict):
         if 'email' in data:
             member.firstname = data['email']

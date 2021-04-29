@@ -23,6 +23,3 @@ class Common:
 
     def ask_email(self, default=None):
         return self.ask(key_name="email", regex=None, default=default)
-
-    def ask_type(self, default=None):
-        return self.ask(key_name="type (seller or customer)", regex="^(customer|seller)$", default=default)

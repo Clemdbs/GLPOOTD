@@ -1,0 +1,1 @@
+Ici, on retrouve un répertoire par artiste. Chaque artiste possède lui-même un répertoire par album. Dans ce répertoire seront présents : les musiques de cet album, ainsi que la pochette de l'album.

@@ -39,7 +39,7 @@ class MemberVue:
 
     def show_members(self):
 
-        members = self._member_controller.list_members()
+        members = self._member_controller.list_musics()
 
         print("Members: ")
         for member in members:
