@@ -161,4 +161,3 @@ class Ui_Lecture(object):
             self.dial.setValue(0)
         self.label_2.setText(str(self.dial.value()))
         self.song.set_volume(float(self.dial.value())/100.0)
-        print(self.song.get_volume())

@@ -36,9 +36,7 @@ class MusicVue:
         print("Operation succeeded: %s" % message)
 
     def show_musics(self):
-
         musics = self._music_controller.list_musics()
-
         print("Musiques : ")
         for music in musics:
             print("* %s %s (%s) - %s %s" % (   music['titre'],
@@ -55,6 +53,15 @@ class MusicVue:
         self.show_music(music)
         return music
 
+    def delete_music(self, titre, artiste, album):
+        print(titre)
+        print(artiste)
+        print(album)
+        music = self._music_controller.search_music(titre, artiste, album)
+        self.show_music(music)
+        self._music_controller.delete_music(music['id'])
+        self.succes_message()
+
 #A FAIRE
 '''
     def update_member(self):
@@ -68,8 +75,5 @@ class MusicVue:
         data['type'] = self._common.ask_type(default=member['type'])
         print()
         return self._member_controller.update_member(member['id'], data)
+'''
 
-    def delete_music(self):
-        member = self.search_member()
-        self._member_controller.delete_member(member['id'])
-        self.succes_message()'''

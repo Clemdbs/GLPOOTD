@@ -58,14 +58,15 @@ class MemberController:
             return member.to_dict()
 
     def check_data(self, data):
-        email = data[0]
-        pseudo = data[1]
-        mot_de_passe = data[2]
-        sexe = data[3]
-        pays = data[4]
+        email = data['email']
+        pseudo = data['pseudo']
+        mot_de_passe = data['mot_de_passe']
+        sexe = data['sexe']
+        pays = data['pays']
+        print(data, "data")
 
         #Test du remplissage :
-        if email == "" or email == "Adresse mail" or pseudo == "" or pseudo == "Pseudo" or mot_de_passe == "Mot de passe" or sexe == "Sexe" or pays == "Pays":
+        if email == "" or pseudo == "" or sexe == "Sexe" or pays == "Pays":
             return 'Veuillez remplir tous les champs'
 
         #Test du mail :
@@ -83,4 +84,11 @@ class MemberController:
         # Tout d'abord, si le mot de passe à une longueur inférieure à 6 (pour une sécurité)
         if len(mot_de_passe) < 6:
             return 'Votre mot de passe doit au minimum contenir 6 caractères !'
+        print("test")
         return True
+
+    def connection(self, email, mot_de_passe):
+        member = self.search_member(email)
+        if(member['mot_de_passe'] == mot_de_passe):
+            return True
+        return False

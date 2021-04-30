@@ -70,10 +70,12 @@ class Ui_Dialog(MemberVue):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.checkBox.setText(_translate("Dialog", "J\'accepte les conditions d\'utilisation"))
         self.checkBox_2.setText(_translate("Dialog", "Je m\'abonne à la newsletter"))
-        self.lineEdit.setText(_translate("Dialog", "Adresse mail"))
-        self.lineEdit_2.setText(_translate("Dialog", "Mot de passe"))
-        self.lineEdit_3.setText(_translate("Dialog", "Confirmation de mot de passe"))
-        self.lineEdit_4.setText(_translate("Dialog", "Pseudo"))
+        self.lineEdit.setPlaceholderText("Adresse mail")
+        self.lineEdit_2.setPlaceholderText("Mot de passe")
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.lineEdit_3.setPlaceholderText("Confirmation de mot de passe")
+        self.lineEdit_3.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.lineEdit_4.setPlaceholderText("Pseudo")
         self.comboBox.setItemText(0, _translate("Dialog", "Pays"))
         self.comboBox.setItemText(1, _translate("Dialog", "France"))
         self.comboBox.setItemText(2, _translate("Dialog", "Russie"))
@@ -101,12 +103,15 @@ class Ui_Dialog(MemberVue):
 
         email = self.lineEdit.text()
         pseudo = self.lineEdit_4.text()
-        mot_de_passe = self.lineEdit.text()
+        mot_de_passe = self.lineEdit_2.text()
         sexe = self.comboBox_2.currentText()
         pays = self.comboBox.currentText()
 
+        print(mot_de_passe)
 
+        print("test avan,t")
         member = self.add_member([email, pseudo, mot_de_passe, sexe, pays])
+        print("test après")
         if isinstance(member, str):
             error_dialog = QtWidgets.QErrorMessage(Dialog)
             error_dialog.showMessage(member)

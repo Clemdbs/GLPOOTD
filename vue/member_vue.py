@@ -39,7 +39,7 @@ class MemberVue:
 
     def show_members(self):
 
-        members = self._member_controller.list_musics()
+        members = self._member_controller.list_members()
 
         print("Members: ")
         for member in members:
@@ -48,7 +48,8 @@ class MemberVue:
                                             member['sexe'],
                                             member['pays']))
 
-    def search_member(self):
+    #À faire ! Revoir la fonction des musiques
+    '''def search_member(self):
         firstname = self._common.ask_name('firstname')
         lastname = self._common.ask_name('lastname')
         member = self._member_controller.search_member(firstname, lastname)
@@ -64,7 +65,7 @@ class MemberVue:
         data['email'] = self._common.ask_email(default=member['email'])
         data['type'] = self._common.ask_type(default=member['type'])
         print()
-        return self._member_controller.update_member(member['id'], data)
+        return self._member_controller.update_member(member['id'], data)'''
 
     def delete_member(self):
         member = self.search_member()
