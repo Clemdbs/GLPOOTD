@@ -5,13 +5,22 @@ from controller.member_controller import MemberController
 
 #TEMPORAIREMENT
 from vue.lecture_vue import Ui_Lecture
+
+#TEMPORAIREMENT VRAIMENT
+from vue.temp import Ui_Dialog
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
 if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())
 
     #La table de données liée au compte utilisateur
-    database_engine = DatabaseEngine(url='sqlite:///compte.db')
+    '''database_engine = DatabaseEngine(url='sqlite:///compte.db')
     database_engine.create_database()
 
     _member_controller = MemberController(database_engine)
@@ -21,7 +30,9 @@ if __name__ == '__main__':
     ui = Ui_Accueil(_member_controller)
     ui.setupUi(Dialog)
     Dialog.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec_())'''
+
+
 
 '''app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
@@ -30,5 +41,8 @@ if __name__ == '__main__':
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())'''
+
+
+
 
 

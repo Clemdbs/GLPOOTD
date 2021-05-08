@@ -55,6 +55,8 @@ class MemberController:
         with self._database_engine.new_session() as session:
             member_dao = MemberDAO(session)
             member = member_dao.get_by_email(email)
+            if member == None:
+                return None
             return member.to_dict()
 
     def check_data(self, data):

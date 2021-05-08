@@ -32,7 +32,7 @@ class MemberDAO(DAO):
             return self._database_session.query(Member).filter_by(email=email)\
                 .order_by(Member.email).one()
         except NoResultFound:
-            raise ResourceNotFound()
+            return None
 
     def create(self, data: dict):
         try:

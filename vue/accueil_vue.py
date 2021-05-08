@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from vue.inscription_vue import Ui_Dialog
 from controller.member_controller import MemberController
 from vue.member_vue import MemberVue
+from vue.lecture_vue import Ui_Lecture
 import sys
 
 
@@ -78,8 +79,16 @@ class Ui_Accueil(MemberVue):
         member = self._member_controller.search_member(email)
 
         print(member)
-        print(member['mot_de_passe'])
-        if(self._member_controller.connection(email, mot_de_passe)):
-            print("ok")
+
+        if member == None:
+            print("Compte non existant")
         else:
-            print("non")
+            print(member['mot_de_passe'])
+            if(self._member_controller.connection(email, mot_de_passe)):
+                Dialog = QtWidgets.QDialog()
+                Dialog.setStyleSheet("background-color: rgb(200,210,250)")
+                ui = Ui_Lecture()
+                ui.setupUi(Dialog)
+                Dialog.show()
+            else:
+                print("non")
