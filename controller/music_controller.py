@@ -57,4 +57,15 @@ class MusicController:
         with self._database_engine.new_session() as session:
             music_dao = MusicDAO(session)
             music = music_dao.get_by_titre_artiste_album(titre, artiste, album)
+            if music == None:
+                return None
+            return music.to_dict()
+
+    def search_music_title(self, titre):
+        # Query database
+        with self._database_engine.new_session() as session:
+            music_dao = MusicDAO(session)
+            music = music_dao.get_by_titre(titre)
+            if music == None:
+                return None
             return music.to_dict()

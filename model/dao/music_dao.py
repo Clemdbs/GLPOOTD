@@ -32,7 +32,14 @@ class MusicDAO(DAO):
             return self._database_session.query(Music).filter_by(album=album).filter_by(artiste=artiste).filter_by(titre=titre)\
                 .order_by(Music.titre).one()
         except NoResultFound:
-            raise ResourceNotFound()
+            return None
+
+    def get_by_titre(self, titre: str):
+        try:
+            return self._database_session.query(Music).filter_by(titre=titre)\
+                .order_by(Music.titre).one()
+        except NoResultFound:
+            return None
 
     def create(self, data: dict):
         try:
