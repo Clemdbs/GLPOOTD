@@ -1,5 +1,6 @@
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy import desc
 
 from model.mapping.music import Music
 from model.dao.dao import DAO
@@ -77,3 +78,18 @@ class MusicDAO(DAO):
             self._database_session.delete(entity)
         except SQLAlchemyError as e:
             raise Error(str(e))
+
+    def ajout_stream(self, music: Music):
+        music.stream += 1
+        try:
+            self._database_session.merge(music)
+            self._database_session.flush()
+        except IntegrityError:
+            raise Error("Erreur stream")
+
+    def get_top(self):
+        try:
+            #On limite à 5 pour avoir les 5 musiques les plus écoutées (triées par ordre décroissant du nombre d'écoute)
+            return self._database_session.query(Music).order_by(desc(Music.stream)).limit(3).all()
+        except NoResultFound:
+            return None

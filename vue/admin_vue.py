@@ -1,11 +1,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from controller.music_controller import MusicController
+from controller.playlist_controller import Playlistcontroller
+from controller.playlist_controller import Playlist
 from vue.music_vue import MusicVue
 import sys
 
 class Ajout_musique(MusicVue):
     def __init__(self, music_controller):
         super().__init__(music_controller)
+        self._playlist_controller = Playlistcontroller(music_controller)
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(1080, 720)
@@ -175,6 +178,7 @@ class Ajout_musique(MusicVue):
         self.pushButton_7.clicked.connect(lambda: self.show())
         self.pushButton_6.clicked.connect(lambda: self.ask())
         self.pushButton_4.clicked.connect(lambda: self.supprimer_musique())
+        self.pushButton_8.clicked.connect(lambda: self.test_playlist())
 
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -204,7 +208,7 @@ class Ajout_musique(MusicVue):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), _translate("Dialog", "Modifier une musique"))
         self.pushButton_6.setText(_translate("Dialog", "Chercher une musique"))
         self.pushButton_7.setText(_translate("Dialog", "Afficher la bdd"))
-        self.pushButton_8.setText(_translate("Dialog", "PushButton"))
+        self.pushButton_8.setText(_translate("Dialog", "Playlists"))
         self.pushButton_9.setText(_translate("Dialog", "PushButton"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), _translate("Dialog", "Tests"))
 
@@ -235,3 +239,11 @@ class Ajout_musique(MusicVue):
         self.show_musics()
     def ask(self):
         self.search_music()
+
+    def test_playlist(self):
+        liste_playlist = self._playlist_controller.liste_playlists
+        for playlist in liste_playlist:
+            print("Nom playlist : ", playlist.nom, " et ayant pour musiques : ")
+            for musique in playlist.musiques:
+                print(musique['titre'], " produit par : ", musique['artiste'], " et ayant l'id= ",
+                      musique['id_dans_playlist'], ";")

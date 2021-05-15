@@ -69,3 +69,20 @@ class MusicController:
             if music == None:
                 return None
             return music.to_dict()
+
+    def ajout_stream_music(self, musique_id):
+        with self._database_engine.new_session() as session:
+            music_dao = MusicDAO(session)
+            music = music_dao.get(musique_id)
+            music_dao.ajout_stream(music)
+
+    def get_top_musics(self):
+        with self._database_engine.new_session() as session:
+            music_dao = MusicDAO(session)
+            musiques = music_dao.get_top()
+            liste_musiques = []
+            for musique in musiques:
+                liste_musiques.append(musique.to_dict())
+            if liste_musiques == []:
+                return None
+            return liste_musiques

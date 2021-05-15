@@ -20,6 +20,10 @@ if __name__ == '__main__':
 
 
     app = QtWidgets.QApplication(sys.argv)
+    icon = QtGui.QIcon()
+    icon.addPixmap(QtGui.QPixmap(r"support\Interface\icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    app.setWindowIcon(icon)
+
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog(_member_controller, _music_controller)
     ui.setupUi(Dialog)
