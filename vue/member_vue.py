@@ -20,16 +20,14 @@ class MemberVue:
         data['email'] = informations[0]
         data['pseudo'] = informations[1]
         data['mot_de_passe'] = informations[2]
-        data['sexe'] = informations[3]
-        data['pays'] = informations[4]
+        data['genre'] = informations[3]
         return self._member_controller.create_member(data)
 
     def show_member(self, member: dict):
         print("Member profile: ")
         print("email :", member['email'], " et pseudo : ", member['pseudo'])
         print("mot_de_passe:", member['mot_de_passe'])
-        print("sexe:", member['sexe'])
-        print("pays:", member['pays'])
+        print("genre:", member['genre'])
 
     def error_message(self, message: str):
         print("/!\\ %s" % message.upper())
@@ -43,10 +41,9 @@ class MemberVue:
 
         print("Members: ")
         for member in members:
-            print("* %s %s (%s) - %s" % (   member['email'],
+            print("* %s %s (%s)" % (   member['email'],
                                             member['pseudo'],
-                                            member['sexe'],
-                                            member['pays']))
+                                            member['genre']))
 
     #À faire ! Revoir la fonction des musiques
     '''def search_member(self):

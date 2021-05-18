@@ -63,12 +63,11 @@ class MemberController:
         email = data['email']
         pseudo = data['pseudo']
         mot_de_passe = data['mot_de_passe']
-        sexe = data['sexe']
-        pays = data['pays']
+        genre = data['genre']
         print(data, "data")
 
         #Test du remplissage :
-        if email == "" or pseudo == "" or sexe == "Sexe" or pays == "Pays":
+        if email == "" or pseudo == "" or genre == "Genre":
             return 'Veuillez remplir tous les champs'
 
         #Test du mail :
@@ -94,3 +93,6 @@ class MemberController:
         if(member['mot_de_passe'] == mot_de_passe):
             return True
         return False
+
+    def modification_de_compte(self, data):
+        print(data)

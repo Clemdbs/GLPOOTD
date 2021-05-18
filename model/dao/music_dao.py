@@ -35,6 +35,14 @@ class MusicDAO(DAO):
         except NoResultFound:
             return None
 
+    def get_by_artiste(self, artiste: str):
+        try:
+            return self._database_session.query(Music).filter_by(artiste=artiste)\
+                .order_by(Music.titre).all()
+        except NoResultFound:
+            return None
+
+    #AVERTISSEMENT SI PLUSIEURS MUSIQUES AVEC LE MEME TITRE
     def get_by_titre(self, titre: str):
         try:
             return self._database_session.query(Music).filter_by(titre=titre)\

@@ -12,8 +12,7 @@ class Member(Base):
     email = Column(String(256), nullable=False)
     pseudo = Column(String(50), nullable=False)
     mot_de_passe = Column(String(50), nullable=False)
-    sexe = Column(String(50), nullable=False)
-    pays = Column(String(256), nullable=False)
+    genre = Column(String(50), nullable=False)
 
 
     def __repr__(self):
@@ -25,6 +24,5 @@ class Member(Base):
             "email": self.email,
             "pseudo": self.pseudo,
             "mot_de_passe": self.mot_de_passe,
-            "sexe": self.sexe,
-            "pays": self.pays
+            "genre": self.genre
         }

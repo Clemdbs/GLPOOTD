@@ -25,6 +25,14 @@ class MusicController:
             music_data = music.to_dict()
         return music_data
 
+    def get_artiste(self, data):
+        with self._database_engine.new_session() as session:
+            artiste = MusicDAO(session).get_by_artiste(data)
+            if artiste != None:
+                return data
+            else:
+                return None
+
     def create_music(self, data):
 
         try:
