@@ -80,9 +80,9 @@ class Ui_Accueil(MemberVue):
 
         print(member)
 
-        if member == None:
-            print("Compte non existant")
-        else:
+        if member == None: #si le compte n'existe pas :
+            print("Compte non existant")    #on affiche que le compte n'existe pas
+        else:  # si le compte existe, on affiche le compte lié au mdp
             print(member['mot_de_passe'])
             if(self._member_controller.connection(email, mot_de_passe)):
                 Dialog = QtWidgets.QDialog()
