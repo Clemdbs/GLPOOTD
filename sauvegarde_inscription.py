@@ -16,7 +16,7 @@ class Ui_Dialog(MemberVue):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(550, 400)
-
+        #setup de la page d'inscription
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(120, 300, 341, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
@@ -95,24 +95,29 @@ class Ui_Dialog(MemberVue):
         self.comboBox_2.setItemText(2, _translate("Dialog", "Homme"))
         self.comboBox_2.setItemText(3, _translate("Dialog", "Autre"))
         self.label.setText(_translate("Dialog", "Date de naissance"))
-
+    #creation de compte
     def creation_du_compte(self, Dialog):
+        #verif si les cgu sont acceptees
         if not self.checkBox.isChecked():
             error_dialog = QtWidgets.QErrorMessage(Dialog)
             error_dialog.showMessage('Veuillez accepter les conditions d\'utilisation pour utiliser nos services.')
             return 0
+        #si adresse mail invalide
         if not test_adresse_mail(self.lineEdit.text(), Dialog):
             return 0
         email = self.lineEdit.text()
+        #pareil pour le mdp
         if not test_mot_de_passe(self.lineEdit_2.text(), self.lineEdit_3.text(), Dialog):
             return 0
         pseudo = self.lineEdit_4.text()
         mot_de_passe = self.lineEdit.text()
+        #si l'utilisateur n'a pas indique son sexe
         if self.comboBox_2.currentText() == "Sexe":
             error_dialog = QtWidgets.QErrorMessage(Dialog)
             error_dialog.showMessage('Veuillez entrer un sexe')
             return 0
         sexe = self.comboBox_2.currentText()
+        # si pas indique son pays
         if self.comboBox.currentText() == "Pays":
             error_dialog = QtWidgets.QErrorMessage(Dialog)
             error_dialog.showMessage('Veuillez entrer votre Pays')
@@ -120,13 +125,10 @@ class Ui_Dialog(MemberVue):
         pays = self.comboBox.currentText()
         member = self.add_member([email, pseudo, mot_de_passe, sexe, pays])
         self.show_member(member)
-        ####
-        #FAIRE UN TEST POUR PAS DEUX COMPTES IDENTIQUES
-        ####
         self.show_members()
 
 
-
+#verification de l'adresse mail, format valide...
 def test_adresse_mail(adresse, Dialog):
     if "@" not in adresse:
         error_dialog = QtWidgets.QErrorMessage(Dialog)
@@ -138,7 +140,6 @@ def test_adresse_mail(adresse, Dialog):
         error_dialog = QtWidgets.QErrorMessage(Dialog)
         error_dialog.showMessage('Votre adresse mail n\'est pas valide')
         return False
-    #Ici, envoyer un mail peut être
     return True
 
 def test_mot_de_passe(mot_de_passe1, mot_de_passe2,Dialog):
@@ -147,7 +148,7 @@ def test_mot_de_passe(mot_de_passe1, mot_de_passe2,Dialog):
         error_dialog = QtWidgets.QErrorMessage(Dialog)
         error_dialog.showMessage('Votre mot de passe ne peut pas avoir d\'espace... !')
         return False
-    #Tout d'abord, si le mot de passe à une longueur inférieure à 6 (pour une sécurité)
+    #Tout d'abord, si le mot de passe à une longueur inférieure à 6 (pour une sécurité/optionnel)
     if len(mot_de_passe1) < 6:
         error_dialog = QtWidgets.QErrorMessage(Dialog)
         error_dialog.showMessage('Votre mot de passe doit au minimum contenir 6 caractères !')

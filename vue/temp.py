@@ -27,7 +27,7 @@ class Ui_Dialog:
 
         #Initialiser le pygame (pour le son une nouvelle fois)
         pygame.init()
-        self.song = None
+        self.song = None #initialisation a none car pas de musique.
         self.id = None
         self.initialisation_pygame_mixer()
     def setupUi(self, Dialog):
@@ -41,7 +41,7 @@ class Ui_Dialog:
         self.stackedWidget.setObjectName("stackedWidget")
 
         ##-------------------------------------------------------------
-        #PAGE D'ACCUEIL (après connection)
+        #PAGE D'ACCUEIL (après connexion)
         ##-------------------------------------------------------------
 
         self.Interface_accueil = QtWidgets.QWidget()

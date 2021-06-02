@@ -51,7 +51,7 @@ class Ui_Accueil(MemberVue):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
         Dialog.show()
-
+    #affichage page de connexion
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Accueil", "Dialog"))
@@ -59,11 +59,11 @@ class Ui_Accueil(MemberVue):
         self.pushButton.setText(_translate("Accueil", "Pas de compte ?"))
         self.label_2.setText(_translate("Accueil", "Adresse mail :"))
         self.label_3.setText(_translate("Accueil", "Mot de passe :"))
-        self.pushButton_2.setText(_translate("Accueil", "Connection"))
+        self.pushButton_2.setText(_translate("Accueil", "Connexion"))
 
         self.pushButton.clicked.connect(lambda: self.inscription())
         self.pushButton_2.clicked.connect(lambda: self.connection())
-
+    #methode pour creer un compte
     def inscription(self):
         ui = Ui_Dialog(self._member_controller)
         Dialog = QtWidgets.QDialog()
@@ -73,7 +73,6 @@ class Ui_Accueil(MemberVue):
     def connection(self):
         #Là où on affichera la page avec les différents onglets
         self.show_members()
-
         email = self.lineEdit.text()
         mot_de_passe = self.lineEdit_2.text()
         member = self._member_controller.search_member(email)
@@ -84,11 +83,11 @@ class Ui_Accueil(MemberVue):
             print("Compte non existant")    #on affiche que le compte n'existe pas
         else:  # si le compte existe, on affiche le compte lié au mdp
             print(member['mot_de_passe'])
-            if(self._member_controller.connection(email, mot_de_passe)):
+            if(self._member_controller.connection(email, mot_de_passe)):  # si l'email et le mdp est bon
                 Dialog = QtWidgets.QDialog()
                 Dialog.setStyleSheet("background-color: rgb(200,210,250)")
                 ui = Ui_Lecture()
                 ui.setupUi(Dialog)
                 Dialog.show()
             else:
-                print("non")
+                print("non")  # on affiche que le mail ou mdp n'est pas bon

@@ -9,6 +9,7 @@ class Ajout_musique(MusicVue):
     def __init__(self, music_controller):
         super().__init__(music_controller)
     def setupUi(self, Dialog):
+        #affichage et boutons de la page musique
         Dialog.setObjectName("Dialog")
         Dialog.resize(1080, 720)
         Dialog.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
@@ -143,6 +144,7 @@ class Ajout_musique(MusicVue):
         self.lineEdit_26.setObjectName("lineEdit_26")
         self.label_30 = QtWidgets.QLabel(self.widget_3)
         self.label_30.setGeometry(QtCore.QRect(40, -20, 1071, 121))
+        #changement de la police
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -181,6 +183,7 @@ class Ajout_musique(MusicVue):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
+        # affichage des boutons et option de la page des musiques
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.pushButton_3.setText(_translate("Dialog", "Valider"))
@@ -210,6 +213,7 @@ class Ajout_musique(MusicVue):
         self.pushButton_9.setText(_translate("Dialog", "PushButton"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), _translate("Dialog", "Tests"))
 
+    #creation du compte / affichage
     def creation_du_compte(self, Dialog):
         titre = self.lineEdit_14.text()
         artiste = self.lineEdit_13.text()
@@ -224,9 +228,6 @@ class Ajout_musique(MusicVue):
             error_dialog.showMessage(music)
 
         self.show_music(music)
-        ####
-        #FAIRE UN TEST POUR PAS DEUX COMPTES IDENTIQUES CAR SÛREMENT PAS GERE ICI
-        ####
 
     def supprimer_musique(self):
         titre = self.lineEdit_20.text()
