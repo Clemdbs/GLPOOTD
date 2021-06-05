@@ -11,6 +11,8 @@ from vue.music_like_vue import Music_LikeVue
 from controller.temp_controller import TempController
 # Pour la musique
 import pygame
+import mutagen
+import time
 
 
 class Ui_Dialog:
@@ -30,7 +32,6 @@ class Ui_Dialog:
 
         # Initialiser le pygame (pour le son une nouvelle fois)
         pygame.init()
-        self.song = None  # initialisation a none car pas de musique.
         self.id = None
         self.initialisation_pygame_mixer()
 
@@ -119,8 +120,14 @@ class Ui_Dialog:
         self.pushButton_droite_1.setIcon(icon_droite)
         self.pushButton_droite_1.setObjectName("pushButton_droite_1")
 
+        self.temps_1 = QSlider(Qt.Horizontal, self.Interface_accueil)
+        self.temps_1.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.temps_1.setMinimum(0)
+        self.temps_1.setMaximum(100)
+        self.temps_1.setValue(50)
+
         self.volume_1 = QSlider(Qt.Horizontal, self.Interface_accueil)
-        self.volume_1.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.volume_1.setGeometry(QtCore.QRect(40, 530, 151, 17))
         self.volume_1.setMinimum(0)
         self.volume_1.setMaximum(100)
         self.volume_1.setValue(50)
@@ -466,8 +473,14 @@ class Ui_Dialog:
         self.pushButton_droite_2.setIcon(icon_droite)
         self.pushButton_droite_2.setObjectName("pushButton_droite_2")
 
+        self.temps_2 = QSlider(Qt.Horizontal, self.Interface_recherche)
+        self.temps_2.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.temps_2.setMinimum(0)
+        self.temps_2.setMaximum(100)
+        self.temps_2.setValue(50)
+
         self.volume_2 = QSlider(Qt.Horizontal, self.Interface_recherche)
-        self.volume_2.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.volume_2.setGeometry(QtCore.QRect(40, 530, 151, 17))
         self.volume_2.setMinimum(0)
         self.volume_2.setMaximum(100)
         self.volume_2.setValue(50)
@@ -618,8 +631,14 @@ class Ui_Dialog:
         self.pushButton_droite_3.setIcon(icon_droite)
         self.pushButton_droite_3.setObjectName("pushButton_droite_3")
 
+        self.temps_3 = QSlider(Qt.Horizontal, self.Interface_compte)
+        self.temps_3.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.temps_3.setMinimum(0)
+        self.temps_3.setMaximum(100)
+        self.temps_3.setValue(50)
+
         self.volume_3 = QSlider(Qt.Horizontal, self.Interface_compte)
-        self.volume_3.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.volume_3.setGeometry(QtCore.QRect(40, 530, 151, 17))
         self.volume_3.setMinimum(0)
         self.volume_3.setMaximum(100)
         self.volume_3.setValue(50)
@@ -838,8 +857,14 @@ class Ui_Dialog:
         self.pushButton_droite_4.setIcon(icon_droite)
         self.pushButton_droite_4.setObjectName("pushButton_droite_4")
 
+        self.temps_4 = QSlider(Qt.Horizontal, self.Interface_artiste)
+        self.temps_4.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.temps_4.setMinimum(0)
+        self.temps_4.setMaximum(100)
+        self.temps_4.setValue(50)
+
         self.volume_4 = QSlider(Qt.Horizontal, self.Interface_artiste)
-        self.volume_4.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.volume_4.setGeometry(QtCore.QRect(40, 530, 151, 17))
         self.volume_4.setMinimum(0)
         self.volume_4.setMaximum(100)
         self.volume_4.setValue(50)
@@ -1004,8 +1029,14 @@ class Ui_Dialog:
         self.pushButton_droite_5.setIcon(icon_droite)
         self.pushButton_droite_5.setObjectName("pushButton_droite_5")
 
+        self.temps_5 = QSlider(Qt.Horizontal, self.Interface_album)
+        self.temps_5.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.temps_5.setMinimum(0)
+        self.temps_5.setMaximum(100)
+        self.temps_5.setValue(50)
+
         self.volume_5 = QSlider(Qt.Horizontal, self.Interface_album)
-        self.volume_5.setGeometry(QtCore.QRect(40, 450, 151, 17))
+        self.volume_5.setGeometry(QtCore.QRect(40, 530, 151, 17))
         self.volume_5.setMinimum(0)
         self.volume_5.setMaximum(100)
         self.volume_5.setValue(50)
@@ -1120,6 +1151,7 @@ class Ui_Dialog:
 
         # On creé tout ça :
         self.retranslateUi(Dialog)
+        self.page_active = 3
         self.stackedWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -1181,6 +1213,13 @@ class Ui_Dialog:
         self.pushButton_pause_3.clicked.connect(lambda: self.toogle_etat_musique())
         self.pushButton_pause_4.clicked.connect(lambda: self.toogle_etat_musique())
         self.pushButton_pause_5.clicked.connect(lambda: self.toogle_etat_musique())
+
+        # Gestion du slider timer
+        self.temps_1.sliderMoved.connect(lambda: self.set_timer(1))
+        self.temps_2.sliderMoved.connect(lambda: self.set_timer(2))
+        self.temps_3.sliderMoved.connect(lambda: self.set_timer(3))
+        self.temps_4.sliderMoved.connect(lambda: self.set_timer(4))
+        self.temps_5.sliderMoved.connect(lambda: self.set_timer(5))
 
         # Gestion du slider volume
         self.volume_1.sliderMoved.connect(lambda: self.set_volume(1))
@@ -1299,19 +1338,26 @@ class Ui_Dialog:
 
     def page(self, numero):
         if numero == 0:
+            self.page_active = 0
             self.stackedWidget.setCurrentIndex(0)
         elif numero == 1:
+            self.page_active = 1
             self.stackedWidget.setCurrentIndex(1)
         elif numero == 2:
+            self.page_active = 2
             self.stackedWidget.setCurrentIndex(2)
         elif numero == 3:
+            self.page_active = 3
             self.stackedWidget.setCurrentIndex(3)
         elif numero == 4:
+            self.page_active = 4
             self.stackedWidget.setCurrentIndex(4)
         elif numero == 5 or numero == 6 or numero == 7:
+            self.page_active = 5
             self.stackedWidget.setCurrentIndex(5)
             self.affichage_albums(numero - 4)
         elif numero == 8:
+            self.page_active = 7
             self.stackedWidget.setCurrentIndex(7)
 
     def page_speciale(self, numero):
@@ -1345,6 +1391,7 @@ class Ui_Dialog:
     def page_artiste(self):
         artiste = self.nom_artiste_1.text()
         if artiste != "":  # Si et seulement si un nom d'artiste est affiché
+            self.page_active = 5
             self.stackedWidget.setCurrentIndex(5)
             self.affichage_albums_artiste(artiste)
 
@@ -1356,6 +1403,7 @@ class Ui_Dialog:
         else:
             artiste = self.pushButton_7.text()
         if artiste != "":
+            self.page_active = 5
             self.stackedWidget.setCurrentIndex(5)
             self.affichage_albums_artiste(artiste)
 
@@ -1363,6 +1411,7 @@ class Ui_Dialog:
         self.boutton_musique_cache()
 
         self.nom_album.setText(album.nom)
+        self.page_active = 6
         self.stackedWidget.setCurrentIndex(6)
 
         musiques = album.musiques_
@@ -1459,6 +1508,7 @@ class Ui_Dialog:
             # Mais un seul résultat
             # Après il faudra faire un affichage où on clique sur la musique désirée
             if isinstance(Musique_ou_artiste, str):
+                self.page_active = 5
                 self.stackedWidget.setCurrentIndex(5)
                 self.affichage_albums_artiste(Musique_ou_artiste)
             else:
@@ -1496,7 +1546,7 @@ class Ui_Dialog:
     def toogle_etat_musique(self):
         # Si on appuie sur le bouton play ou pause, pour stopper ou redémarrer la musique
         if self.etat_musique == "Play":
-            pygame.mixer.pause()
+            pygame.mixer.music.pause()
             self.etat_musique = "Pause"
             self.pushButton_pause_1.setIcon(self.icon_play)
             self.pushButton_pause_2.setIcon(self.icon_play)
@@ -1504,13 +1554,52 @@ class Ui_Dialog:
             self.pushButton_pause_4.setIcon(self.icon_play)
             self.pushButton_pause_5.setIcon(self.icon_play)
         else:
-            pygame.mixer.unpause()
+            pygame.mixer.music.unpause()
             self.etat_musique = "Play"
             self.pushButton_pause_1.setIcon(self.icon_pause)
             self.pushButton_pause_2.setIcon(self.icon_pause)
             self.pushButton_pause_3.setIcon(self.icon_pause)
             self.pushButton_pause_4.setIcon(self.icon_pause)
             self.pushButton_pause_5.setIcon(self.icon_pause)
+
+    def set_timer(self, numero):
+        # On met à jour les sliders des autres pages en même temps que
+        # de récupérer la valeur du slider de la page active.
+        if numero == 1:
+            valeur = self.temps_1.value()
+            self.temps_2.setValue(valeur)
+            self.temps_3.setValue(valeur)
+            self.temps_4.setValue(valeur)
+            self.temps_5.setValue(valeur)
+        elif numero == 2:
+            valeur = self.temps_2.value()
+            self.temps_1.setValue(valeur)
+            self.temps_3.setValue(valeur)
+            self.temps_4.setValue(valeur)
+            self.temps_5.setValue(valeur)
+        elif numero == 3:
+            valeur = self.temps_3.value()
+            self.temps_2.setValue(valeur)
+            self.temps_1.setValue(valeur)
+            self.temps_4.setValue(valeur)
+            self.temps_5.setValue(valeur)
+        elif numero == 4:
+            valeur = self.temps_4.value()
+            self.temps_2.setValue(valeur)
+            self.temps_1.setValue(valeur)
+            self.temps_3.setValue(valeur)
+            self.temps_5.setValue(valeur)
+        else:
+            valeur = self.temps_5.value()
+            self.temps_2.setValue(valeur)
+            self.temps_1.setValue(valeur)
+            self.temps_3.setValue(valeur)
+            self.temps_4.setValue(valeur)
+        # Et on va aussi venir modifier la valeur du volume sonnore.
+        pygame.mixer.music.set_pos(self.longueur_son/100*float(valeur))
+
+        self.position_son = (self.longueur_son/100*float(valeur))*1000 - pygame.mixer.music.get_pos()
+
 
     def set_volume(self, numero):
         # On met à jour les sliders des autres pages en même temps que
@@ -1546,9 +1635,7 @@ class Ui_Dialog:
             self.volume_3.setValue(valeur)
             self.volume_4.setValue(valeur)
         # Et on va aussi venir modifier la valeur du volume sonnore.
-        if self.song != None:  # Pour éviter de modifier la valeur de volume d'un son s'il n'est pas lancé
-            # Ne fonctionne pas encore
-            self.song.set_volume(float(valeur) / 100.0)
+        pygame.mixer.music.set_volume(float(valeur) / 100.0)
 
     def affichage_top_musiques_stream(self):
         ##
@@ -1681,47 +1768,30 @@ class Ui_Dialog:
             self.id = musique['id']
         if musique == None:
             return
-        if self.song != None:
-            self.song.stop()
         self.lire_musique(musique)
 
     def lire_musique(self, musique):
 
-        if musique == None:
-            return
-        if self.song != None:
-            self.song.stop()
-        print(pygame.mixer.music.queue)
-        self.song = pygame.mixer.Sound(r"" + musique['chemin_musique'])
+        ##ATTENTION, pygame.mixer.music.get_pos() est nulle ...
+        '''This gets the number of milliseconds that the music has been playing for. The returned time only represents how long the music has been playing; it does not take into account any starting position offsets.'''
+        #Je note ici le problème :
+        #Tout d'abord, le pygame.mixer.music.set_pos() permet de définir l'endroit de la musique
+        #où la musique sera (en secondes)
+        #alors que le get_pos() retourne en millisecondes
+        #et surtout, le get_pos() retourne seulement le temps que la musique a mis à être écoutée
+        #donc avec un set_pos() ça ne prend pas en compte, il faut donc stocker les valeurs...
 
-        self.channel.play(self.song, loops=0)
-        pygame.mixer.music.load(r"support\Musique\Dinos\Stamina\93_mesures.ogg")
-        print(pygame.mixer.music.queue)
 
-        '''##TEST
+
 
         playlist = list()
-        playlist.append(r"support\Musique\Dinos\Stamina\93_mesures.ogg")
-        playlist.append(r"support\Musique\Lefa\Fame\Maniaque.ogg")
-        playlist.append(r"support\Musique\Lefa\Famous\Solitude.ogg")
+        playlist.append(r"" + musique['chemin_musique'])
 
-        pygame.mixer.music.load(playlist.pop())  # Get the first track from the playlist
-        pygame.mixer.music.queue(playlist.pop())  # Queue the 2nd song
-        pygame.mixer.music.set_endevent(pygame.USEREVENT)  # Setup the end track event
-        pygame.mixer.music.play()  # Play the music
+        pygame.mixer.music.load(playlist.pop())  # On récupère la musique
+        pygame.mixer.music.set_endevent(pygame.USEREVENT)  # On met en place l'évènement lorsque la musique se termine
+        pygame.mixer.music.play()  # et on fait play
 
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.USEREVENT:  # A track has ended
-                    if len(playlist) > 0:  # If there are more tracks in the queue...
-                        pygame.mixer.music.queue(playlist.pop())
-                if event.type == pygame.QUIT:
-                    pygame.mixer.quit()
-
-
-        ##'''
-        # self.song.play()
+        ##
         self._temp_controller.lecture_musique(musique)
         # On actualise l'id :
         self.id = musique['id']
@@ -1736,8 +1806,36 @@ class Ui_Dialog:
             self.toogle_etat_musique()
         # Et on reset le coeur
         self.test_like()
-        # Test
-        print(self.song.get_length())
+
+        #On utilise un package pour connaître la longueur du son
+        #le mixer.music ne l'offre pas
+        #une autre possibilité était d'utiliser mixer.Sound mais ça charge le son...
+        audio = mutagen.File(r"" + musique['chemin_musique'])
+        self.longueur_son = audio.info.length
+
+        #variable qui va servir d'avoir une vraie pos (contrairement au get_pos())
+        self.position_son = 0
+
+        #Tant que la musique est lue :
+        #on met à jour les sliders
+        #et on crée un event quand la musique se termine
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.USEREVENT:  # Si la musique se finie
+                    # On démarre la musique suivante, qui appartient à l'album
+                    return self.changer_musique(1, self.id)
+            if (pygame.mixer.music.get_pos() + int(self.position_son)) % 2000 == 0:
+                if self.page_active == 0:
+                    self.temps_1.setValue(((pygame.mixer.music.get_pos() + int(self.position_son)) / self.longueur_son * 1 / 10) + 1)
+                elif self.page_active == 1:
+                    self.temps_2.setValue(pygame.mixer.music.get_pos() / self.longueur_son * 1 / 10)
+                elif self.page_active == 2:
+                    self.temps_3.setValue(pygame.mixer.music.get_pos() / self.longueur_son * 1 / 10)
+                elif self.page_active == 5:
+                    self.temps_4.setValue(pygame.mixer.music.get_pos() / self.longueur_son * 1 / 10)
+                elif self.page_active == 6:
+                    self.temps_5.setValue(pygame.mixer.music.get_pos() / self.longueur_son * 1 / 10)
 
     def changer_musique(self, test, id):
         if id != None:
@@ -1918,7 +2016,4 @@ class Ui_Dialog:
     def initialisation_pygame_mixer(self):
         # initialize pygame.mixer
         pygame.mixer.init(frequency=44100, size=-16, channels=0, buffer=2 ** 12)
-
         self.channel = pygame.mixer.Channel(0)
-
-# self.song.set_volume(0.5)
