@@ -51,3 +51,12 @@ class Music_LikeController:
                 return None
             music_data = music_like.to_dict()
         return music_data
+
+    def reinitialisation_de_la_base_de_donnees(self):
+        musiques = self.list_musics_like()
+        tableau_des_id = []
+        for musique in musiques:
+            id = musique['id']
+            tableau_des_id.append(id)
+        for id in tableau_des_id:
+            self.delete_music(id)

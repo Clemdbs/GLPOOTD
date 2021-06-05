@@ -3,10 +3,12 @@ from controller.music_controller import MusicController
 from controller.playlist_controller import Playlistcontroller
 from controller.playlist_controller import Playlist
 from vue.music_vue import MusicVue
-import sys
+
 
 class Ajout_musique(MusicVue):
-    def __init__(self, music_controller):
+    def __init__(self, music_controller, music_like_controller):
+        self._music_controller = music_controller
+        self._music_like_controller = music_like_controller
         super().__init__(music_controller)
     def setupUi(self, Dialog):
         #affichage et boutons de la page musique
@@ -180,6 +182,8 @@ class Ajout_musique(MusicVue):
         self.pushButton_6.clicked.connect(lambda: self.ask())
         self.pushButton_4.clicked.connect(lambda: self.supprimer_musique())
 
+        self.pushButton_9.clicked.connect(lambda: self.ajoutertouteslesmusiques())
+
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
@@ -210,7 +214,7 @@ class Ajout_musique(MusicVue):
         self.pushButton_6.setText(_translate("Dialog", "Chercher une musique"))
         self.pushButton_7.setText(_translate("Dialog", "Afficher la bdd"))
         self.pushButton_8.setText(_translate("Dialog", "Playlists"))
-        self.pushButton_9.setText(_translate("Dialog", "PushButton"))
+        self.pushButton_9.setText(_translate("Dialog", "AJOUTER TOUTES LES MUSIQUES"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), _translate("Dialog", "Tests"))
 
     #creation du compte / affichage
@@ -238,3 +242,14 @@ class Ajout_musique(MusicVue):
         self.show_musics()
     def ask(self):
         self.search_music()
+
+    def ajoutertouteslesmusiques(self):
+        print(self._music_controller.list_musics())
+        self._music_like_controller.reinitialisation_de_la_base_de_donnees()
+        musiques = self._music_controller.initialisation_de_la_base_de_donnees()
+        for musique in musiques:
+            music = self.add_music(musique)
+            self.show_music(music)
+
+
+

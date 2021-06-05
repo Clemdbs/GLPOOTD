@@ -81,8 +81,10 @@ class TempController:
             # On essaie de voir s'il ne s'agit pas d'un artiste
             artiste = self._music_controller.get_artiste(data)
             if artiste != None:
+                print(artiste, "testaussi")
                 return artiste
             return None
+        print("test_fin_de_fonction")
         return musiques
 
     #Fonction temporaire
@@ -112,3 +114,7 @@ class TempController:
         # On récupère enfin la musique
         musique = self._music_controller.get_music(nouvel_id)
         return musique
+
+    def retour_user(self):
+        user = self._session_controller.id_user
+        return user

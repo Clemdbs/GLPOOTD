@@ -37,8 +37,7 @@ class MusicDAO(DAO):
 
     def get_by_artiste(self, artiste: str):
         try:
-            return self._database_session.query(Music).filter_by(artiste=artiste)\
-                .order_by(Music.titre).all()
+            return self._database_session.query(Music).filter_by(artiste=artiste).order_by(Music.titre).all()
         except NoResultFound:
             return None
 

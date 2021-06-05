@@ -50,6 +50,10 @@ class Playlistcontroller:
 
     def get_top_albums(self):
         temp = self.liste_playlists
+        #Ici on actualise les streams de l'album pour que l'affichage s'actualise
+        for album in temp:
+            self.actualisation_ecoutes(album)
+        top_sauvegarde = {'nom': "", 'liste_id': [], 'nombre_ecoutes': 0, "artiste": ""}
         sauvegarde = []
         top3 = []
         for i in range(3):
@@ -66,6 +70,16 @@ class Playlistcontroller:
         #Ici on met ça pour éviter de supprimer les éléments de la liste_playlists
         #C'est une sorte de pointeur
         self.liste_playlists += sauvegarde
+        #Maintenant, on parcours la liste (de longueur 3), et on supprime tous les éléments égaux à top
+        test = True
+        while test:
+            for top_ in top3:
+                if top_ == top_sauvegarde:
+                    top3.remove(top_)
+                    break
+            if top_sauvegarde not in top3:
+                test = False
+        #Une fois que le top est cohérent, on le retourne
         return top3
 
     def get_albums(self, artiste):

@@ -7,6 +7,7 @@ class Session:
     def initialiser_user(self, id, pseudo):
         self.id_user = id
         self.pseudo = pseudo
+        print(pseudo, id, "test")
 
     def actualiser_musique(self, id):
         self.id_musique_en_cours = id

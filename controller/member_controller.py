@@ -2,6 +2,7 @@ import re
 
 from model.dao.member_dao import MemberDAO
 from exceptions import Error, InvalidData
+from PyQt5 import QtWidgets
 
 
 class MemberController:
@@ -78,15 +79,23 @@ class MemberController:
         if "." not in analyse:
             return 'Votre adresse mail n\'est pas valide'
 
-        #Test du mot de passe :
+        if self.check_mot_de_passe(mot_de_passe):
+            return True
+        return False
+
+    def check_mot_de_passe(self, mot_de_passe):
+        # Test du mot de passe :
         # On ne veut pas d'espace dans le mot de passe
         if " " in mot_de_passe:
+            return False
             return 'Votre mot de passe ne peut pas avoir d\'espace... !'
         # Tout d'abord, si le mot de passe à une longueur inférieure à 6 (pour une sécurité)
         if len(mot_de_passe) < 6:
+            return False
             return 'Votre mot de passe doit au minimum contenir 6 caractères !'
         print("test")
         return True
+
 
     def connection(self, email, mot_de_passe):
         member = self.search_member(email)
@@ -94,5 +103,21 @@ class MemberController:
             return True
         return False
 
-    def modification_de_compte(self, data):
-        print(data)
+    def modification_de_compte(self, data, user, dialog):
+        utilisateur = self.get_member(user)
+        if data[0] != data[1] or data[0] != utilisateur['mot_de_passe']:
+            error_dialog = QtWidgets.QErrorMessage(dialog)
+            error_dialog.setWindowTitle("Erreur")
+            error_dialog.showMessage("Les valeurs entrées ne sont pas bonnes. Veuillez re-essayez")
+            return 0
+        if not self.check_mot_de_passe(data[2]):
+            error_dialog = QtWidgets.QErrorMessage(dialog)
+            error_dialog.setWindowTitle("Erreur")
+            error_dialog.showMessage("Veuillez entrer un mot de passe valide (6 caractères minimum)")
+            return 0
+        self.update_member(user, {'mot_de_passe': data[2]})
+        return 1
+
+    def suppression_de_compte(self, user):
+        self.delete_member(user)
+

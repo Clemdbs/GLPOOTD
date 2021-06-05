@@ -1,5 +1,7 @@
+import sys
+
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QSlider
+from PyQt5.QtWidgets import QSlider, QApplication
 from PyQt5.QtCore import Qt, QSize
 
 from vue.member_vue import MemberVue
@@ -7,7 +9,7 @@ from vue.music_vue import MusicVue
 from vue.music_like_vue import Music_LikeVue
 
 from controller.temp_controller import TempController
-#Pour la musique
+# Pour la musique
 import pygame
 
 
@@ -22,15 +24,18 @@ class Ui_Dialog:
         self._music_like_controller = music_like_controller
         self._music_like_vue = Music_LikeVue(self._music_like_controller)
 
-        self._temp_controller = TempController(self._member_controller, self._music_controller, self._music_like_controller)
+        self._temp_controller = TempController(self._member_controller, self._music_controller,
+                                               self._music_like_controller)
         self._playlist_controller = self._temp_controller._playlist_controller
 
-        #Initialiser le pygame (pour le son une nouvelle fois)
+        # Initialiser le pygame (pour le son une nouvelle fois)
         pygame.init()
-        self.song = None #initialisation a none car pas de musique.
+        self.song = None  # initialisation a none car pas de musique.
         self.id = None
         self.initialisation_pygame_mixer()
+
     def setupUi(self, Dialog):
+        self.Dialog = Dialog
         Dialog.setObjectName("Dialog")
         Dialog.resize(1080, 720)
         Dialog.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
@@ -41,7 +46,7 @@ class Ui_Dialog:
         self.stackedWidget.setObjectName("stackedWidget")
 
         ##-------------------------------------------------------------
-        #PAGE D'ACCUEIL (après connexion)
+        # PAGE D'ACCUEIL (après connexion)
         ##-------------------------------------------------------------
 
         self.Interface_accueil = QtWidgets.QWidget()
@@ -101,14 +106,16 @@ class Ui_Dialog:
         self.pushButton_gauche_1.setGeometry(QtCore.QRect(40, 470, 51, 22))
         self.pushButton_gauche_1.setText("")
         icon_gauche = QtGui.QIcon()
-        icon_gauche.addPixmap(QtGui.QPixmap(r"support\Interface\flèche_gauche.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon_gauche.addPixmap(QtGui.QPixmap(r"support\Interface\flèche_gauche.ico"), QtGui.QIcon.Normal,
+                              QtGui.QIcon.Off)
         self.pushButton_gauche_1.setIcon(icon_gauche)
         self.pushButton_gauche_1.setObjectName("pushButton_gauche_1")
         self.pushButton_droite_1 = QtWidgets.QPushButton(self.Interface_accueil)
         self.pushButton_droite_1.setGeometry(QtCore.QRect(140, 470, 51, 22))
         self.pushButton_droite_1.setText("")
         icon_droite = QtGui.QIcon()
-        icon_droite.addPixmap(QtGui.QPixmap(r"support\Interface\flèche_droite.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon_droite.addPixmap(QtGui.QPixmap(r"support\Interface\flèche_droite.ico"), QtGui.QIcon.Normal,
+                              QtGui.QIcon.Off)
         self.pushButton_droite_1.setIcon(icon_droite)
         self.pushButton_droite_1.setObjectName("pushButton_droite_1")
 
@@ -132,15 +139,16 @@ class Ui_Dialog:
         self.pushButton_coeur_1.setGeometry(QtCore.QRect(99, 500, 31, 22))
         self.pushButton_coeur_1.setText("")
         self.icon_coeur_vide = QtGui.QIcon()
-        self.icon_coeur_vide.addPixmap(QtGui.QPixmap(r"support\Interface\coeur_vide.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.icon_coeur_vide.addPixmap(QtGui.QPixmap(r"support\Interface\coeur_vide.ico"), QtGui.QIcon.Normal,
+                                       QtGui.QIcon.Off)
         self.icon_coeur_plein = QtGui.QIcon()
-        self.icon_coeur_plein.addPixmap(QtGui.QPixmap(r"support\Interface\coeur_plein.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.icon_coeur_plein.addPixmap(QtGui.QPixmap(r"support\Interface\coeur_plein.ico"), QtGui.QIcon.Normal,
+                                        QtGui.QIcon.Off)
         self.couleur = "noir"
-
 
         self.pushButton_coeur_1.setIcon(self.icon_coeur_vide)
         self.pushButton_coeur_1.setObjectName("pushButton_coeur_1")
-        #Ligne pour enlever les bordures. Voir le commentaire du dessous.
+        # Ligne pour enlever les bordures. Voir le commentaire du dessous.
         self.pushButton_coeur_1.setStyleSheet("border-style:outset")
 
         self.nom_musique_1 = QtWidgets.QLabel(self.Interface_accueil)
@@ -237,11 +245,11 @@ class Ui_Dialog:
         self.pushButton_8.setDefault(False)
         self.pushButton_8.setFlat(False)
         self.pushButton_8.setObjectName("pushButton_8")
-        #Label pour le titre de la musique et le nom de l'artiste lié à la musique
+        # Label pour le titre de la musique et le nom de l'artiste lié à la musique
         self.label_top_musique1_1 = QtWidgets.QLabel(self.Interface_accueil)
         self.label_top_musique1_1.setGeometry(QtCore.QRect(250, 365, 200, 80))
         self.label_top_musique1_1.setText("")
-        #Label pour indiquer le nombre de streams de cette musique :
+        # Label pour indiquer le nombre de streams de cette musique :
         self.label_top_musique1_2 = QtWidgets.QLabel(self.Interface_accueil)
         self.label_top_musique1_2.setGeometry(QtCore.QRect(250, 435, 161, 31))
         self.label_top_musique1_2.setText("")
@@ -330,10 +338,11 @@ class Ui_Dialog:
         self.pushButton_playlist_personnelle.setDefault(False)
         self.pushButton_playlist_personnelle.setFlat(False)
         self.pushButton_playlist_personnelle.setObjectName("pushButton_playlist_personnelle")
-        self.pushButton_playlist_personnelle.setIcon(QtGui.QIcon(QtGui.QPixmap(r"support\Interface\playlist_personnelle.jpg")))
+        self.pushButton_playlist_personnelle.setIcon(
+            QtGui.QIcon(QtGui.QPixmap(r"support\Interface\playlist_personnelle.jpg")))
         self.pushButton_playlist_personnelle.setIconSize(QSize(80, 80))
 
-        #On ajoute la page à toutes les pages que l'on aura
+        # On ajoute la page à toutes les pages que l'on aura
         self.stackedWidget.addWidget(self.Interface_accueil)
 
         ##-------------------------------------------------------------
@@ -412,8 +421,8 @@ class Ui_Dialog:
         self.pushButton.setAcceptDrops(False)
         self.pushButton.setAutoFillBackground(False)
         self.pushButton.setStyleSheet("background-color: rgb(2, 82, 255);\n"
-"color: rgb(255, 255, 255);\n"
-"font: 75 12pt \"MS Shell Dlg 2\";https://www.hostinger.fr/tutoriels/commandes-git")
+                                      "color: rgb(255, 255, 255);\n"
+                                      "font: 75 12pt \"MS Shell Dlg 2\";https://www.hostinger.fr/tutoriels/commandes-git")
         self.pushButton.setCheckable(False)
         self.pushButton.setDefault(False)
         self.pushButton.setFlat(False)
@@ -425,8 +434,8 @@ class Ui_Dialog:
         self.pushButton_2.setAcceptDrops(False)
         self.pushButton_2.setAutoFillBackground(False)
         self.pushButton_2.setStyleSheet("background-color: rgb(255, 0, 0);\n"
-"color: rgb(255, 255, 255);\n"
-"font: 75 12pt \"MS Shell Dlg 2\";https://www.hostinger.fr/tutoriels/commandes-git")
+                                        "color: rgb(255, 255, 255);\n"
+                                        "font: 75 12pt \"MS Shell Dlg 2\";https://www.hostinger.fr/tutoriels/commandes-git")
         self.pushButton_2.setCheckable(False)
         self.pushButton_2.setDefault(False)
         self.pushButton_2.setFlat(False)
@@ -505,7 +514,8 @@ class Ui_Dialog:
         self.pushButton_3.setMouseTracking(False)
         self.pushButton_3.setAcceptDrops(False)
         self.pushButton_3.setAutoFillBackground(False)
-        self.pushButton_3.setStyleSheet("background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69));")
+        self.pushButton_3.setStyleSheet(
+            "background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69));")
         self.pushButton_3.setText("")
         self.pushButton_3.setCheckable(False)
         self.pushButton_3.setDefault(False)
@@ -517,7 +527,8 @@ class Ui_Dialog:
         self.pushButton_6.setMouseTracking(False)
         self.pushButton_6.setAcceptDrops(False)
         self.pushButton_6.setAutoFillBackground(False)
-        self.pushButton_6.setStyleSheet("background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(125, 255, 0, 69), stop:0.315789 rgba(64, 255, 0, 69), stop:0.423533 rgba(90, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(130, 255, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.578947 rgba(99, 255, 0, 130), stop:0.625 rgba(108, 255, 0, 69), stop:1 rgba(255, 255, 0, 69))")
+        self.pushButton_6.setStyleSheet(
+            "background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(125, 255, 0, 69), stop:0.315789 rgba(64, 255, 0, 69), stop:0.423533 rgba(90, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(130, 255, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.578947 rgba(99, 255, 0, 130), stop:0.625 rgba(108, 255, 0, 69), stop:1 rgba(255, 255, 0, 69))")
         self.pushButton_6.setText("")
         self.pushButton_6.setCheckable(False)
         self.pushButton_6.setDefault(False)
@@ -529,7 +540,8 @@ class Ui_Dialog:
         self.pushButton_7.setMouseTracking(False)
         self.pushButton_7.setAcceptDrops(False)
         self.pushButton_7.setAutoFillBackground(False)
-        self.pushButton_7.setStyleSheet("background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(125, 255, 0, 69), stop:0.315789 rgba(64, 255, 0, 69), stop:0.423533 rgba(0, 207, 255, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(71, 214, 255, 130), stop:0.518717 rgba(130, 255, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.559809 rgba(71, 239, 255, 130), stop:0.578947 rgba(0, 189, 255, 130), stop:0.625 rgba(0, 251, 255, 69), stop:1 rgba(255, 255, 0, 69))")
+        self.pushButton_7.setStyleSheet(
+            "background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(125, 255, 0, 69), stop:0.315789 rgba(64, 255, 0, 69), stop:0.423533 rgba(0, 207, 255, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(71, 214, 255, 130), stop:0.518717 rgba(130, 255, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.559809 rgba(71, 239, 255, 130), stop:0.578947 rgba(0, 189, 255, 130), stop:0.625 rgba(0, 251, 255, 69), stop:1 rgba(255, 255, 0, 69))")
         self.pushButton_7.setText("")
         self.pushButton_7.setCheckable(False)
         self.pushButton_7.setDefault(False)
@@ -587,7 +599,6 @@ class Ui_Dialog:
         self.pushButton_Compte_3.setAutoExclusive(False)
         self.pushButton_Compte_3.setFlat(True)
         self.pushButton_Compte_3.setObjectName("pushButton_Compte_3")
-
 
         self.label_cover_3 = QtWidgets.QLabel(self.Interface_compte)
         self.label_cover_3.setGeometry(QtCore.QRect(40, 220, 151, 151))
@@ -1088,7 +1099,7 @@ class Ui_Dialog:
         self.lineEdit_mot_de_passe_5.setGeometry(QtCore.QRect(50, 280, 301, 21))
         self.lineEdit_mot_de_passe_5.setObjectName("lineEdit_mot_de_passe_4")
 
-        #Pour que les mots de passe ne soient pas visible mais affichés avec des points :
+        # Pour que les mots de passe ne soient pas visible mais affichés avec des points :
         self.lineEdit_mot_de_passe_3.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_mot_de_passe_4.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_mot_de_passe_5.setEchoMode(QtWidgets.QLineEdit.Password)
@@ -1107,19 +1118,18 @@ class Ui_Dialog:
         # On ajoute la page à toutes les pages que l'on aura
         self.stackedWidget.addWidget(self.Interface_modification_compte)
 
-
-        #On creé tout ça :
+        # On creé tout ça :
         self.retranslateUi(Dialog)
         self.stackedWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        #Appel de la fonction page qui permet de switcher de page comme son nom l'indique
-        #Chaque page possède ses propres items
-        #--------------------------------------------------------------------------------
+        # Appel de la fonction page qui permet de switcher de page comme son nom l'indique
+        # Chaque page possède ses propres items
+        # --------------------------------------------------------------------------------
         self.pushButton_Accueil_1.clicked.connect(lambda: self.page(0))
         self.pushButton_Accueil_2.clicked.connect(lambda: self.page(0))
         self.pushButton_Accueil_3.clicked.connect(lambda: self.page(0))
-        #Attention, il faut recacher les boutons
+        # Attention, il faut recacher les boutons
         self.pushButton_Accueil_4.clicked.connect(lambda: self.page_speciale(0))
         self.pushButton_Accueil_5.clicked.connect(lambda: self.page_speciale2(0))
 
@@ -1138,17 +1148,17 @@ class Ui_Dialog:
         self.pushButton_Compte_5.clicked.connect(lambda: self.page_speciale2(2))
         # --------------------------------------------------------------------------------
 
-        #On cache les boutons que l'on veut pas afficher:
+        # On cache les boutons que l'on veut pas afficher:
         self.boutton_musique_cache()
 
-        #Si l'on se connecte, on arrive sur la page d'accueil
+        # Si l'on se connecte, on arrive sur la page d'accueil
         self.pushButton_connexion.clicked.connect(lambda: self.page(0))
-        #Si l'on appuie sur le bouton "Pas de compte", on arrive sur la page de création de compte
+        # Si l'on appuie sur le bouton "Pas de compte", on arrive sur la page de création de compte
         self.pushButton_pas_de_compte.clicked.connect(lambda: self.page(4))
-        #Si l'on appuie sur annuler, on arrive sur la page de connection
+        # Si l'on appuie sur annuler, on arrive sur la page de connection
         self.pushButton_annuler.clicked.connect(lambda: self.page(3))
 
-        #Si l'on appuie sur le bouton de deconnexion :
+        # Si l'on appuie sur le bouton de deconnexion :
         self.pushButton_14.clicked.connect(lambda: self.page(3))
         # Si l'on appuie sur le bouton modifier le compte
         self.pushButton_modifier_compte.clicked.connect(lambda: self.page(8))
@@ -1156,40 +1166,41 @@ class Ui_Dialog:
         self.pushButton_annuler_2.clicked.connect(lambda: self.page(2))
         # Si l'on appuie sur bouton valider pour modifier le compte :
         self.pushButton_valider.clicked.connect(lambda: self.modification_de_compte())
+        self.pushButton_supprimer_compte.clicked.connect(lambda: self.suppression_de_compte())
 
-        #Ici, on va appeler la fonction qui va gérer la connection :
+        # Ici, on va appeler la fonction qui va gérer la connection :
         self.pushButton_connexion.clicked.connect(lambda: self.connection())
-        #Ici la recherche d'une musique (pour l'instant)
+        # Ici la recherche d'une musique (pour l'instant)
         self.pushButton_rechercher.clicked.connect(lambda: self.rechercher())
 
-        #Gestion du bouton pause & play
+        # Gestion du bouton pause & play
         self.etat_musique = "Play"
-        #À l'appui du bouton, on appelle la fonction toogle_etat_musique qui mettra en pause ou redémarrera la musique
+        # À l'appui du bouton, on appelle la fonction toogle_etat_musique qui mettra en pause ou redémarrera la musique
         self.pushButton_pause_1.clicked.connect(lambda: self.toogle_etat_musique())
         self.pushButton_pause_2.clicked.connect(lambda: self.toogle_etat_musique())
         self.pushButton_pause_3.clicked.connect(lambda: self.toogle_etat_musique())
         self.pushButton_pause_4.clicked.connect(lambda: self.toogle_etat_musique())
         self.pushButton_pause_5.clicked.connect(lambda: self.toogle_etat_musique())
 
-        #Gestion du slider volume
+        # Gestion du slider volume
         self.volume_1.sliderMoved.connect(lambda: self.set_volume(1))
         self.volume_2.sliderMoved.connect(lambda: self.set_volume(2))
         self.volume_3.sliderMoved.connect(lambda: self.set_volume(3))
         self.volume_4.sliderMoved.connect(lambda: self.set_volume(4))
         self.volume_5.sliderMoved.connect(lambda: self.set_volume(5))
 
-        #Affichage des musiques top streams :
+        # Affichage des musiques top streams :
         self.affichage_top_musiques_stream()
 
-        #Affichage des albums top streams:
+        # Affichage des albums top streams:
         self.affichage_top_albums_stream()
 
-        #Détection des clics sur les boutons contenant les musiques populaires :
+        # Détection des clics sur les boutons contenant les musiques populaires :
         self.pushButton_8.clicked.connect(lambda: self.lecture_musique_top(1))
         self.pushButton_9.clicked.connect(lambda: self.lecture_musique_top(2))
         self.pushButton_10.clicked.connect(lambda: self.lecture_musique_top(3))
 
-        #Détection des clics sur les flèches pour changer de musique :
+        # Détection des clics sur les flèches pour changer de musique :
         self.pushButton_gauche_1.clicked.connect(lambda: self.changer_musique(0, self.id))
         self.pushButton_droite_1.clicked.connect(lambda: self.changer_musique(1, self.id))
         self.pushButton_gauche_2.clicked.connect(lambda: self.changer_musique(0, self.id))
@@ -1201,37 +1212,38 @@ class Ui_Dialog:
         self.pushButton_gauche_5.clicked.connect(lambda: self.changer_musique(0, self.id))
         self.pushButton_droite_5.clicked.connect(lambda: self.changer_musique(1, self.id))
 
-        #Détection des clics sur l'artiste pour ouvrir la page le concernant :
+        # Détection des clics sur l'artiste pour ouvrir la page le concernant :
         self.nom_artiste_1.clicked.connect(lambda: self.page_artiste())
         self.nom_artiste_2.clicked.connect(lambda: self.page_artiste())
         self.nom_artiste_3.clicked.connect(lambda: self.page_artiste())
 
-        #Détection des clics sur les top albums :
+        # Détection des clics sur les top albums :
         self.label_top_playlist1_1.clicked.connect(lambda: self.page(5))
         self.label_top_playlist2_1.clicked.connect(lambda: self.page(6))
         self.label_top_playlist3_1.clicked.connect(lambda: self.page(7))
 
-        #Détection des clics sur la playlists des musiques likées:
-        self.pushButton_playlist_personnelle.clicked.connect(lambda: self.page_album(self._playlist_controller.playlist_perso()))
+        # Détection des clics sur la playlists des musiques likées:
+        self.pushButton_playlist_personnelle.clicked.connect(
+            lambda: self.page_album(self._playlist_controller.playlist_perso()))
 
-        #Lors de l'appuie sur le bouton like
+        # Lors de l'appuie sur le bouton like
         self.pushButton_coeur_1.clicked.connect(lambda: self.like())
         self.pushButton_coeur_2.clicked.connect(lambda: self.like())
         self.pushButton_coeur_3.clicked.connect(lambda: self.like())
         self.pushButton_coeur_4.clicked.connect(lambda: self.like())
         self.pushButton_coeur_5.clicked.connect(lambda: self.like())
 
-        #Lors de l'appuie sur les boutons d'artiste préférés
+        # Lors de l'appuie sur les boutons d'artiste préférés
         self.pushButton_3.clicked.connect(lambda: self.page_artiste_top(1))
         self.pushButton_6.clicked.connect(lambda: self.page_artiste_top(2))
         self.pushButton_7.clicked.connect(lambda: self.page_artiste_top(3))
 
-        #Lors de l'appuie sur le bouton pour créer un compte
+        # Lors de l'appuie sur le bouton pour créer un compte
         self.pushButton_creer_compte.clicked.connect(lambda: self.cree_compte(self.Interface_creation_compte))
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Spothiton"))
+        Dialog.setWindowTitle(_translate("Dialog", "Spythonfy"))
         self.pushButton_Accueil_1.setText(_translate("Dialog", "Accueil"))
         self.pushButton_Recherche_1.setText(_translate("Dialog", "Recherche"))
         self.pushButton_Compte_1.setText(_translate("Dialog", "Mon compte"))
@@ -1285,7 +1297,6 @@ class Ui_Dialog:
         self.pushButton_Recherche_5.setText(_translate("Dialog", "Recherche"))
         self.pushButton_Compte_5.setText(_translate("Dialog", "Mon compte"))
 
-
     def page(self, numero):
         if numero == 0:
             self.stackedWidget.setCurrentIndex(0)
@@ -1299,13 +1310,14 @@ class Ui_Dialog:
             self.stackedWidget.setCurrentIndex(4)
         elif numero == 5 or numero == 6 or numero == 7:
             self.stackedWidget.setCurrentIndex(5)
-            self.affichage_albums(numero-4)
+            self.affichage_albums(numero - 4)
         elif numero == 8:
             self.stackedWidget.setCurrentIndex(7)
 
     def page_speciale(self, numero):
         self.boutton_album_cache()
         self.page(numero)
+
     def boutton_album_cache(self):
         # Ici, il faut recacher tous les boutons qui ont possiblement été décachés juste avant :
         self.pushButton_album1.hide()
@@ -1317,6 +1329,7 @@ class Ui_Dialog:
         self.pushButton_album7.hide()
         self.pushButton_album8.hide()
         self.pushButton_album9.hide()
+
     def boutton_musique_cache(self):
         # Ici, il faut recacher tous les boutons qui ont possiblement été décachés juste avant :
         self.pushButton_musique1.hide()
@@ -1331,7 +1344,7 @@ class Ui_Dialog:
 
     def page_artiste(self):
         artiste = self.nom_artiste_1.text()
-        if artiste != "": #Si et seulement si un nom d'artiste est affiché
+        if artiste != "":  # Si et seulement si un nom d'artiste est affiché
             self.stackedWidget.setCurrentIndex(5)
             self.affichage_albums_artiste(artiste)
 
@@ -1393,7 +1406,6 @@ class Ui_Dialog:
         mot_de_passe = self.lineEdit_mot_de_passe_2.text()
         genre = self.comboBox_genre.currentText()
 
-
         print("test avant")
         member = self._member_vue.add_member([email, pseudo, mot_de_passe, genre])
         print("test après")
@@ -1408,7 +1420,7 @@ class Ui_Dialog:
         self._member_vue.show_members()
 
     def set_heart_black(self):
-        #Permet de mettre le coeur en noir à chaque nouvelle musique non aimée, c'est un reset en gros
+        # Permet de mettre le coeur en noir à chaque nouvelle musique non aimée, c'est un reset en gros
         self.couleur = "noir"
         self.pushButton_coeur_1.setIcon(self.icon_coeur_vide)
         self.pushButton_coeur_2.setIcon(self.icon_coeur_vide)
@@ -1417,7 +1429,7 @@ class Ui_Dialog:
         self.pushButton_coeur_5.setIcon(self.icon_coeur_vide)
 
     def set_heart_red(self):
-        #Permet de mettre le coeur en noir à chaque nouvelle musique non aimée, c'est un reset en gros
+        # Permet de mettre le coeur en noir à chaque nouvelle musique non aimée, c'est un reset en gros
         self.couleur = "rouge"
         self.pushButton_coeur_1.setIcon(self.icon_coeur_plein)
         self.pushButton_coeur_2.setIcon(self.icon_coeur_plein)
@@ -1426,10 +1438,11 @@ class Ui_Dialog:
         self.pushButton_coeur_5.setIcon(self.icon_coeur_plein)
 
     def connection(self):
-        #Petit affichage de test :
+        # Petit affichage de test :
         self._member_vue.show_members()
-        #Essaie de connection grâce au controller :
-        Membre = self._temp_controller.test_connection([self.lineEdit_adresse_mail_1.text(), self.lineEdit_mot_de_passe_1.text()])
+        # Essaie de connection grâce au controller :
+        Membre = self._temp_controller.test_connection(
+            [self.lineEdit_adresse_mail_1.text(), self.lineEdit_mot_de_passe_1.text()])
         if Membre == None:
             print("Nom d'utilisateur ou mot de passe faux")
         else:
@@ -1437,14 +1450,14 @@ class Ui_Dialog:
             self.affichage_artistes_preferes()
 
     def rechercher(self):
-        #Essaie de recherche grâce au controller :
+        # Essaie de recherche grâce au controller :
         Musique_ou_artiste = self._temp_controller.recherche_musique_ou_artiste(self.lineEdit_barre_de_recherche.text())
         if Musique_ou_artiste == None:
             print("Musique ou artiste non trouvé(e)")
         else:
-            #Au début on gère pas encore les différents trucs obtenus
-            #Mais un seul résultat
-            #Après il faudra faire un affichage où on clique sur la musique désirée
+            # Au début on gère pas encore les différents trucs obtenus
+            # Mais un seul résultat
+            # Après il faudra faire un affichage où on clique sur la musique désirée
             if isinstance(Musique_ou_artiste, str):
                 self.stackedWidget.setCurrentIndex(5)
                 self.affichage_albums_artiste(Musique_ou_artiste)
@@ -1481,7 +1494,7 @@ class Ui_Dialog:
         self.nom_artiste_5.setText(musique['artiste'])
 
     def toogle_etat_musique(self):
-    #Si on appuie sur le bouton play ou pause, pour stopper ou redémarrer la musique
+        # Si on appuie sur le bouton play ou pause, pour stopper ou redémarrer la musique
         if self.etat_musique == "Play":
             pygame.mixer.pause()
             self.etat_musique = "Pause"
@@ -1500,8 +1513,8 @@ class Ui_Dialog:
             self.pushButton_pause_5.setIcon(self.icon_pause)
 
     def set_volume(self, numero):
-    #On met à jour les sliders des autres pages en même temps que
-    #de récupérer la valeur du slider de la page active.
+        # On met à jour les sliders des autres pages en même temps que
+        # de récupérer la valeur du slider de la page active.
         if numero == 1:
             valeur = self.volume_1.value()
             self.volume_2.setValue(valeur)
@@ -1532,9 +1545,9 @@ class Ui_Dialog:
             self.volume_1.setValue(valeur)
             self.volume_3.setValue(valeur)
             self.volume_4.setValue(valeur)
-    #Et on va aussi venir modifier la valeur du volume sonnore.
-        if self.song != None:   #Pour éviter de modifier la valeur de volume d'un son s'il n'est pas lancé
-                                #Ne fonctionne pas encore
+        # Et on va aussi venir modifier la valeur du volume sonnore.
+        if self.song != None:  # Pour éviter de modifier la valeur de volume d'un son s'il n'est pas lancé
+            # Ne fonctionne pas encore
             self.song.set_volume(float(valeur) / 100.0)
 
     def affichage_top_musiques_stream(self):
@@ -1544,18 +1557,18 @@ class Ui_Dialog:
         ## FAIRE DES TESTS POUR NE PAS DEBORDER !!!!
         ##
         top_musics = self._music_controller.get_top_musics()
-        #Tout d'abord on initialise les variables pour ne pas avoir de problème
+        # Tout d'abord on initialise les variables pour ne pas avoir de problème
         self.musique_1 = None
         self.musique_2 = None
         self.musique_3 = None
-        #Première musique en terme de stream :
+        # Première musique en terme de stream :
         if len(top_musics) >= 1:
             self.musique_1 = top_musics[0]
             chemin_cover_image = self.musique_1['chemin_cover_image']
             self.pushButton_8.setIcon(QtGui.QIcon(QtGui.QPixmap(r"" + chemin_cover_image)))
-            #Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
+            # Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
             self.pushButton_8.setIconSize(QSize(80, 80))
-            #On met le texte :
+            # On met le texte :
             texte = self.musique_1['titre'] + "\n" + self.musique_1['artiste']
             self.label_top_musique1_1.setText(texte)
             font = QtGui.QFont()
@@ -1563,12 +1576,12 @@ class Ui_Dialog:
             self.label_top_musique1_1.setFont(font)
             streams = str(self.musique_1['stream']) + " streams"
             self.label_top_musique1_2.setText(streams)
-        #Deuxième
+        # Deuxième
         if len(top_musics) >= 2:
             self.musique_2 = top_musics[1]
             chemin_cover_image = self.musique_2['chemin_cover_image']
             self.pushButton_9.setIcon(QtGui.QIcon(QtGui.QPixmap(r"" + chemin_cover_image)))
-            #Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
+            # Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
             self.pushButton_9.setIconSize(QSize(80, 80))
             # On met le texte :
             texte = self.musique_2['titre'] + "\n" + self.musique_2['artiste']
@@ -1578,12 +1591,12 @@ class Ui_Dialog:
             self.label_top_musique2_1.setFont(font)
             streams = str(self.musique_2['stream']) + " streams"
             self.label_top_musique2_2.setText(streams)
-        #Troisième
+        # Troisième
         if len(top_musics) >= 3:
             self.musique_3 = top_musics[2]
             chemin_cover_image = self.musique_3['chemin_cover_image']
             self.pushButton_10.setIcon(QtGui.QIcon(QtGui.QPixmap(r"" + chemin_cover_image)))
-            #Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
+            # Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
             self.pushButton_10.setIconSize(QSize(80, 80))
             # On met le texte :
             texte = self.musique_3['titre'] + "\n" + self.musique_3['artiste']
@@ -1594,7 +1607,6 @@ class Ui_Dialog:
             streams = str(self.musique_3['stream']) + " streams"
             self.label_top_musique3_2.setText(streams)
 
-
     def affichage_top_albums_stream(self):
         ##
         ## ATTENTION ICI
@@ -1602,17 +1614,17 @@ class Ui_Dialog:
         ## FAIRE DES TESTS POUR NE PAS DEBORDER !!!!
         ##
         top_albums = self._playlist_controller.get_top_albums()
-        #Tout d'abord on initialise les variables pour ne pas avoir de problème
+        # Tout d'abord on initialise les variables pour ne pas avoir de problème
         self.album_1 = None
         self.album_2 = None
         self.album_3 = None
-        #Première musique en terme de stream :
+        # Première musique en terme de stream :
         if len(top_albums) >= 1:
             self.album_1 = top_albums[0]
             chemin_cover_image = self.album_1['chemin_image']
             print(self.album_1['nom'], self.album_1['chemin_image'])
             self.pushButton_4.setIcon(QtGui.QIcon(QtGui.QPixmap(r"" + chemin_cover_image)))
-            #Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
+            # Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
             self.pushButton_4.setIconSize(QSize(80, 80))
             # On met le texte :
             texte = self.album_1['nom'] + "\n" + self.album_1['artiste']
@@ -1627,7 +1639,7 @@ class Ui_Dialog:
             chemin_cover_image = self.album_2['chemin_image']
             print(self.album_2['nom'], self.album_2['chemin_image'])
             self.pushButton_5.setIcon(QtGui.QIcon(QtGui.QPixmap(r"" + chemin_cover_image)))
-            #Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
+            # Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
             self.pushButton_5.setIconSize(QSize(80, 80))
             # On met le texte :
             texte = self.album_2['nom'] + "\n" + self.album_2['artiste']
@@ -1642,7 +1654,7 @@ class Ui_Dialog:
             chemin_cover_image = self.album_3['chemin_image']
             print(self.album_3['nom'], self.album_3['chemin_image'])
             self.pushButton_13.setIcon(QtGui.QIcon(QtGui.QPixmap(r"" + chemin_cover_image)))
-            #Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
+            # Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
             self.pushButton_13.setIconSize(QSize(80, 80))
             # On met le texte :
             texte = self.album_3['nom'] + "\n" + self.album_3['artiste']
@@ -1706,15 +1718,17 @@ class Ui_Dialog:
                         pygame.mixer.music.queue(playlist.pop())
                 if event.type == pygame.QUIT:
                     pygame.mixer.quit()
-        
+
 
         ##'''
-        #self.song.play()
+        # self.song.play()
         self._temp_controller.lecture_musique(musique)
         # On actualise l'id :
         self.id = musique['id']
         # On actualise le nombre de streams
         self.affichage_top_musiques_stream()
+        # On actualise le nombre de streams des albums
+        self.affichage_top_albums_stream()
         # On actualise l'affichage de la musique en cours :
         self.affichage_cover_titre_artiste(musique)
         # on oublie pas de démarrer la musique si elle est en pause
@@ -1742,9 +1756,9 @@ class Ui_Dialog:
     def affichage_albums_artiste(self, artiste):
         # Ici, il faut recacher tous les boutons qui ont possiblement été décachés juste avant :
         self.boutton_album_cache()
-        #On récupère tous les albums de l'artiste en question
+        # On récupère tous les albums de l'artiste en question
         albums = self._playlist_controller.get_albums(artiste)
-        #On actualise les écoutes de chaque album
+        # On actualise les écoutes de chaque album
         for album in albums:
             self._playlist_controller.actualisation_ecoutes(album)
         nombre_albums = len(albums)
@@ -1762,7 +1776,7 @@ class Ui_Dialog:
                     self.pushButton_album1.setText(albums[i].nom + "\n" + str(albums[i].nombre_ecoutes) + " écoute !")
                 else:
                     self.pushButton_album1.setText(albums[i].nom + "\n" + str(albums[i].nombre_ecoutes) + " écoutes !")
-                #On applique un StyleSheet pour fixer l'icone à gauche
+                # On applique un StyleSheet pour fixer l'icone à gauche
                 self.pushButton_album1.setStyleSheet("text-align:left")
                 self.pushButton_album1.clicked.connect(lambda: self.page_album(albums[0]))
                 self.pushButton_album1.show()
@@ -1862,10 +1876,10 @@ class Ui_Dialog:
         else:
             playlist = self._temp_controller.delete_music_like()
             self.set_heart_black()
-        #On actualise les artistes préférés :
+        # On actualise les artistes préférés :
         self.affichage_artistes_preferes()
 
-    #Fonction à intégrer dans le future fonction de lecture
+    # Fonction à intégrer dans le future fonction de lecture
     def test_like(self):
         test = self._temp_controller.islike()
         if test:
@@ -1873,7 +1887,7 @@ class Ui_Dialog:
         else:
             self.set_heart_black()
 
-    #Affichage des artistes préférés
+    # Affichage des artistes préférés
     def affichage_artistes_preferes(self):
         playlist = self._temp_controller.get_playlist_like()
         # On reset les artistes préférés
@@ -1888,23 +1902,23 @@ class Ui_Dialog:
         if len(playlist.top_artistes) >= 3:
             self.pushButton_7.setText(playlist.top_artistes[2]['nom'])
 
-    #Pour modifier le mot de passe de l'utilisateur
+    # Pour modifier le mot de passe de l'utilisateur
     def modification_de_compte(self):
-        self._member_controller.modification_de_compte([self.lineEdit_mot_de_passe_3.text(), self.lineEdit_mot_de_passe_4.text(), self.lineEdit_mot_de_passe_5.text()])
-        self.page(2)
+        if(self._member_controller.modification_de_compte(
+            [self.lineEdit_mot_de_passe_3.text(), self.lineEdit_mot_de_passe_4.text(),
+             self.lineEdit_mot_de_passe_5.text()], self._temp_controller.retour_user(), self.Dialog) == 1):
+            self.page(2)
 
-    #Pour supprimer le compte
+    # Pour supprimer le compte
     def suppression_de_compte(self):
-        pass
+        self._member_controller.suppression_de_compte(self._temp_controller.retour_user())
+        self.page(3)
 
-    #On initiale le pygame mixer ici
+    # On initiale le pygame mixer ici
     def initialisation_pygame_mixer(self):
         # initialize pygame.mixer
         pygame.mixer.init(frequency=44100, size=-16, channels=0, buffer=2 ** 12)
 
         self.channel = pygame.mixer.Channel(0)
 
-
-
-
-#self.song.set_volume(0.5)
+# self.song.set_volume(0.5)

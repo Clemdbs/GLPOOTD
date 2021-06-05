@@ -46,13 +46,13 @@ class MemberDAO(DAO):
     #C'est à faire !
     def update(self, member: Member, data: dict):
         if 'email' in data:
-            member.firstname = data['email']
+            member.email = data['email']
         if 'pseudo' in data:
-            member.lastname = data['pseudo']
+            member.pseudo = data['pseudo']
         if 'mot_de_passe' in data:
-            member.email = data['mot_de_passe']
+            member.mot_de_passe = data['mot_de_passe']
         if 'genre' in data:
-            member.type = data['genre']
+            member.genre = data['genre']
         try:
             self._database_session.merge(member)
             self._database_session.flush()

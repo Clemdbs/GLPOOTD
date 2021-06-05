@@ -1,4 +1,3 @@
-from vue.accueil_vue import Ui_Accueil
 from model.database import DatabaseEngine
 from controller.member_controller import MemberController
 from controller.music_controller import MusicController
@@ -12,6 +11,7 @@ from vue.lecture_vue import Ui_Lecture
 from vue.temp import Ui_Dialog
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+
 
 if __name__ == '__main__':
     database_engine = DatabaseEngine(url='sqlite:///musique.db')
