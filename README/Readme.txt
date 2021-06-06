@@ -37,7 +37,7 @@ La page de gestion de compte :
 
 Cette page offre la possibilité de modifier son compte, c'est-à-dire son mot de passe, ou de le supprimer, mais également de se déconnecter.
 
-Chaque artiste possède sa propre page, avec son image, et ses différents albums. En cliquant sur un album, on peut accéder à ses différentes musiques, et en cliquant sur les boutons de musiques, nous pouvons les écouter.
+Chaque artiste possède sa propre page avec ses différents albums. En cliquant sur un album, on peut accéder à ses différentes musiques, et en cliquant sur les boutons de musiques, nous pouvons les écouter.
 
 La musique apparaît en bas à gauche. Le titre et l'artiste est noté en dessous de la cover de l'album. De plus, un slider permet de naviguer dans la musique, et un timer dynamique y est présent.
 Le bouton pause permet de mettre en pause la musique, la flèche de droite, de lire la musique suivante dans l'album, celle de gauche, la précédente, et le bouton like permet de mettre la musique dans sa playlist des musiques like (il est possible de la retirer en re-appuyant dessus).
