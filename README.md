@@ -1,4 +1,4 @@
-# GLPOOTD
+# Spythonfy
 
 Projet développé en python3.9.
 
