@@ -62,6 +62,8 @@ La cinquièe page donne la possibilité de voir la base de données liée aux me
 
 Les musiques doivent être en format .ogg, chacune des musiques doit être en mono (et non stéréo). De plus, l'arborescence doit être respectée, comme les vidéos le montre dans le dossier README, c'est-à-dire, chaque musique doit être dans le dossier qui porte le nom de l'album, lui-même dans le dossier portant le nom de son artiste. De plus l'image , c'est-à-dire, la cover de l'album doit être dans le même dossier, avec pour format .jpg, et doit-être carrée. De plus, le fichier description.txt ne doit comporter qu'une ligne, sans espace avec le type de musique que l'album comporte.
 
+Il est OBLIGATOIRE de mettre des musiques dans la base de données pour que le "main.py" se lance. Elles peuvent être ajoutées en lançant le "main_admin.py", puis quand le programme est lancée en cliquant sur Valider en dessous de la ligne "Ajouter toutes les musiques d'un coup", par exemple.
+
 
 Erreur possible : 
 
