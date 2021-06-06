@@ -1,5 +1,6 @@
 from vue.common_music import Common_music
 
+
 class MusicVue:
     """
     Music Vue
@@ -63,19 +64,3 @@ class MusicVue:
         self.show_music(music)
         self._music_controller.delete_music(music['id'])
         self.succes_message()
-
-#A FAIRE
-'''
-    def update_member(self):
-        member = self.search_member()
-        data = {}
-        print("Update Member")
-        print()
-        data['firstname'] = self._common.ask_name(key_name="firstname", default=member['firstname'])
-        data['lastname'] = self._common.ask_name(key_name="lastname", default=member['lastname'])
-        data['email'] = self._common.ask_email(default=member['email'])
-        data['type'] = self._common.ask_type(default=member['type'])
-        print()
-        return self._member_controller.update_member(member['id'], data)
-'''
-

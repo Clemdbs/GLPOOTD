@@ -8,8 +8,8 @@ class MemberVue:
     """
 
     def __init__(self, member_controller):
-        self._common = Common()
         self._member_controller = member_controller
+        self._common = Common()
 
     def add_member(self, informations):
         # Show subscription formular
@@ -36,7 +36,6 @@ class MemberVue:
         print("Operation succeeded: %s" % message)
 
     def show_members(self):
-
         members = self._member_controller.list_members()
 
         print("Members: ")
@@ -45,14 +44,16 @@ class MemberVue:
                                             member['pseudo'],
                                             member['genre']))
 
-    #À faire ! Revoir la fonction des musiques
-    '''def search_member(self):
-        firstname = self._common.ask_name('firstname')
-        lastname = self._common.ask_name('lastname')
-        member = self._member_controller.search_member(firstname, lastname)
+    def search_member(self):
+        print("ahh")
+        email = self._common.ask_email('email')
+        print("oui")
+        member = self._member_controller.search_member(email)
+        self.show_member(member)
         return member
 
-    def update_member(self):
+    # À faire ! Revoir la fonction des musiques
+    '''def update_member(self):
         member = self.search_member()
         data = {}
         print("Update Member")

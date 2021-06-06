@@ -35,8 +35,7 @@ class MemberController:
                 member_data = member.to_dict()
                 return member_data
         except Error as e:
-            # log error
-            raise e
+            return None
 
     def update_member(self, member_id, member_data):
         with self._database_engine.new_session() as session:
@@ -65,7 +64,6 @@ class MemberController:
         pseudo = data['pseudo']
         mot_de_passe = data['mot_de_passe']
         genre = data['genre']
-        print(data, "data")
 
         #Test du remplissage :
         if email == "" or pseudo == "" or genre == "Genre":
@@ -88,12 +86,9 @@ class MemberController:
         # On ne veut pas d'espace dans le mot de passe
         if " " in mot_de_passe:
             return False
-            return 'Votre mot de passe ne peut pas avoir d\'espace... !'
         # Tout d'abord, si le mot de passe à une longueur inférieure à 6 (pour une sécurité)
         if len(mot_de_passe) < 6:
             return False
-            return 'Votre mot de passe doit au minimum contenir 6 caractères !'
-        print("test")
         return True
 
 
@@ -121,3 +116,15 @@ class MemberController:
     def suppression_de_compte(self, user):
         self.delete_member(user)
 
+    def reinitialisation_de_la_base_de_donnees(self):
+        membres = self.list_members()
+        tableau_des_id = []
+        for membre in membres:
+            id = membre['id']
+            tableau_des_id.append(id)
+        for id in tableau_des_id:
+            self.delete_member(id)
+
+    def delete_by_email(self, mail):
+        membre = self.search_member(mail)
+        self.delete_member(membre['id'])

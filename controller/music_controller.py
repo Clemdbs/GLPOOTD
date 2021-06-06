@@ -39,10 +39,8 @@ class MusicController:
     def create_music(self, data):
         try:
             with self._database_engine.new_session() as session:
-                print("a")
                 # Save music in database
                 music = MusicDAO(session).create(data)
-                print("a")
                 music_data = music.to_dict()
                 return music_data
         except Error as e:
@@ -182,7 +180,6 @@ class MusicController:
         #Le tri est enfin opérationnel, il ne reste "plus" qu'à créer les musiques correspondantes à tout ceci
         #Et on aura enfin automatiser la création des musiques
         return musiques
-
 
     def inverser_string(self, chaine):
         nouvelle_chaine = ""

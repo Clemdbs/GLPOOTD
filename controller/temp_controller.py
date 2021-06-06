@@ -46,12 +46,9 @@ class TempController:
     def islike(self):
         if self._session_controller.id_user != "" and self._session_controller.id_musique_en_cours != "":
             data = {"id_musique": self._session_controller.id_musique_en_cours, "id_utilisateur": self._session_controller.id_user}
-            print(data, "data")
             retour = self._music_like_controller.get_id_by_data(data)
-            print(retour)
             if retour == None:
                 return False
-            print("oui")
             return True
 
     def get_playlist_like(self):
@@ -81,17 +78,14 @@ class TempController:
             # On essaie de voir s'il ne s'agit pas d'un artiste
             artiste = self._music_controller.get_artiste(data)
             if artiste != None:
-                print(artiste, "testaussi")
                 return artiste
             return None
-        print("test_fin_de_fonction")
         return musiques
 
-    #Fonction temporaire
+
     def lecture_musique(self, musique):
         self._session_controller.actualiser_musique(musique['id'])
         self._music_controller.ajout_stream_music(musique['id'])
-        print(self._session_controller.id_musique_en_cours)
 
     def change_musique(self, test, id):
         playlist = self._playlist_controller.get_playlist_by_musique_id(id)

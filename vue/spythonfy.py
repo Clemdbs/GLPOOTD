@@ -26,8 +26,7 @@ class Ui_Dialog:
         self._music_like_controller = music_like_controller
         self._music_like_vue = Music_LikeVue(self._music_like_controller)
 
-        self._temp_controller = TempController(self._member_controller, self._music_controller,
-                                               self._music_like_controller)
+        self._temp_controller = TempController(self._member_controller, self._music_controller, self._music_like_controller)
         self._playlist_controller = self._temp_controller._playlist_controller
 
         # Initialiser le pygame (pour le son une nouvelle fois)
@@ -47,7 +46,7 @@ class Ui_Dialog:
         self.stackedWidget.setObjectName("stackedWidget")
 
         ##-------------------------------------------------------------
-        # PAGE D'ACCUEIL (après connexion)
+        # PAGE D'ACCUEIL (après connection)
         ##-------------------------------------------------------------
 
         self.Interface_accueil = QtWidgets.QWidget()
@@ -104,7 +103,7 @@ class Ui_Dialog:
         self.label_cover_1.setObjectName("label_cover_1")
 
         self.pushButton_gauche_1 = QtWidgets.QPushButton(self.Interface_accueil)
-        self.pushButton_gauche_1.setGeometry(QtCore.QRect(40, 470, 51, 22))
+        self.pushButton_gauche_1.setGeometry(QtCore.QRect(40, 500, 51, 22))
         self.pushButton_gauche_1.setText("")
         icon_gauche = QtGui.QIcon()
         icon_gauche.addPixmap(QtGui.QPixmap(r"support\Interface\flèche_gauche.ico"), QtGui.QIcon.Normal,
@@ -112,7 +111,7 @@ class Ui_Dialog:
         self.pushButton_gauche_1.setIcon(icon_gauche)
         self.pushButton_gauche_1.setObjectName("pushButton_gauche_1")
         self.pushButton_droite_1 = QtWidgets.QPushButton(self.Interface_accueil)
-        self.pushButton_droite_1.setGeometry(QtCore.QRect(140, 470, 51, 22))
+        self.pushButton_droite_1.setGeometry(QtCore.QRect(140, 500, 51, 22))
         self.pushButton_droite_1.setText("")
         icon_droite = QtGui.QIcon()
         icon_droite.addPixmap(QtGui.QPixmap(r"support\Interface\flèche_droite.ico"), QtGui.QIcon.Normal,
@@ -127,13 +126,25 @@ class Ui_Dialog:
         self.temps_1.setValue(50)
 
         self.volume_1 = QSlider(Qt.Horizontal, self.Interface_accueil)
-        self.volume_1.setGeometry(QtCore.QRect(40, 530, 151, 17))
+        self.volume_1.setGeometry(QtCore.QRect(40, 560, 151, 17))
         self.volume_1.setMinimum(0)
         self.volume_1.setMaximum(100)
         self.volume_1.setValue(50)
 
+        self.label_volume_min_1 = QtWidgets.QLabel(self.Interface_accueil)
+        self.label_volume_min_1.setGeometry(QtCore.QRect(40, 583, 15, 15))
+        self.label_volume_min_1.setPixmap(QtGui.QPixmap(r"support\Interface\volume_min.png"))
+        self.label_volume_min_1.setScaledContents(True)
+        self.label_volume_min_1.setObjectName("label_volume_min_1")
+
+        self.label_volume_max_1 = QtWidgets.QLabel(self.Interface_accueil)
+        self.label_volume_max_1.setGeometry(QtCore.QRect(178, 583, 15, 15))
+        self.label_volume_max_1.setPixmap(QtGui.QPixmap(r"support\Interface\volume_max.png"))
+        self.label_volume_max_1.setScaledContents(True)
+        self.label_volume_max_1.setObjectName("label_volume_max_1")
+
         self.pushButton_pause_1 = QtWidgets.QPushButton(self.Interface_accueil)
-        self.pushButton_pause_1.setGeometry(QtCore.QRect(105, 470, 20, 22))
+        self.pushButton_pause_1.setGeometry(QtCore.QRect(105, 500, 20, 22))
         self.pushButton_pause_1.setText("")
         self.icon_pause = QtGui.QIcon()
         self.icon_pause.addPixmap(QtGui.QPixmap(r"support\Interface\pause.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -143,7 +154,7 @@ class Ui_Dialog:
         self.pushButton_pause_1.setObjectName("pushButton_pause_1")
 
         self.pushButton_coeur_1 = QtWidgets.QPushButton(self.Interface_accueil)
-        self.pushButton_coeur_1.setGeometry(QtCore.QRect(99, 500, 31, 22))
+        self.pushButton_coeur_1.setGeometry(QtCore.QRect(99, 530, 31, 22))
         self.pushButton_coeur_1.setText("")
         self.icon_coeur_vide = QtGui.QIcon()
         self.icon_coeur_vide.addPixmap(QtGui.QPixmap(r"support\Interface\coeur_vide.ico"), QtGui.QIcon.Normal,
@@ -157,6 +168,18 @@ class Ui_Dialog:
         self.pushButton_coeur_1.setObjectName("pushButton_coeur_1")
         # Ligne pour enlever les bordures. Voir le commentaire du dessous.
         self.pushButton_coeur_1.setStyleSheet("border-style:outset")
+
+        self.label_temps_11 = QtWidgets.QLabel(self.Interface_accueil)
+        self.label_temps_11.setGeometry(QtCore.QRect(40, 470, 241, 22))
+        self.label_temps_11.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_11.setObjectName("label_temps_11")
+        self.label_temps_11.setText("")
+
+        self.label_temps_12 = QtWidgets.QLabel(self.Interface_accueil)
+        self.label_temps_12.setGeometry(QtCore.QRect(160, 470, 241, 22))
+        self.label_temps_12.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_12.setObjectName("label_temps_12")
+        self.label_temps_12.setText("")
 
         self.nom_musique_1 = QtWidgets.QLabel(self.Interface_accueil)
         self.nom_musique_1.setGeometry(QtCore.QRect(40, 400, 151, 17))
@@ -192,7 +215,7 @@ class Ui_Dialog:
         self.pushButton_4.setObjectName("pushButton_4")
         # Label pour le titre de l'album et le nom de l'artiste lié à l'album
         self.label_top_playlist1_1 = QtWidgets.QPushButton(self.Interface_accueil)
-        self.label_top_playlist1_1.setGeometry(QtCore.QRect(250, 140, 200, 80))
+        self.label_top_playlist1_1.setGeometry(QtCore.QRect(250, 140, 250, 80))
         self.label_top_playlist1_1.setCheckable(False)
         self.label_top_playlist1_1.setAutoRepeat(False)
         self.label_top_playlist1_1.setAutoExclusive(False)
@@ -200,7 +223,7 @@ class Ui_Dialog:
         self.label_top_playlist1_1.setStyleSheet("text-align: left")
         # Label pour indiquer le nombre de streams de cet album :
         self.label_top_playlist1_2 = QtWidgets.QLabel(self.Interface_accueil)
-        self.label_top_playlist1_2.setGeometry(QtCore.QRect(250, 210, 161, 31))
+        self.label_top_playlist1_2.setGeometry(QtCore.QRect(250, 210, 250, 31))
         self.label_top_playlist1_2.setText("")
         self.label_playlists_populaires = QtWidgets.QLabel(self.Interface_accueil)
         self.label_playlists_populaires.setGeometry(QtCore.QRect(250, 20, 300, 31))
@@ -211,7 +234,7 @@ class Ui_Dialog:
         self.label_playlists_populaires.setObjectName("label_playlists_populaires")
         self.pushButton_5 = QtWidgets.QPushButton(self.Interface_accueil)
         self.pushButton_5.setEnabled(True)
-        self.pushButton_5.setGeometry(QtCore.QRect(390, 50, 80, 80))
+        self.pushButton_5.setGeometry(QtCore.QRect(550, 50, 80, 80))
         self.pushButton_5.setMouseTracking(False)
         self.pushButton_5.setAcceptDrops(False)
         self.pushButton_5.setAutoFillBackground(False)
@@ -223,7 +246,7 @@ class Ui_Dialog:
         self.pushButton_5.setObjectName("pushButton_5")
         # Label pour le titre de l'album et le nom de l'artiste lié à l'album
         self.label_top_playlist2_1 = QtWidgets.QPushButton(self.Interface_accueil)
-        self.label_top_playlist2_1.setGeometry(QtCore.QRect(390, 140, 200, 80))
+        self.label_top_playlist2_1.setGeometry(QtCore.QRect(550, 140, 250, 80))
         self.label_top_playlist2_1.setCheckable(False)
         self.label_top_playlist2_1.setAutoRepeat(False)
         self.label_top_playlist2_1.setAutoExclusive(False)
@@ -231,7 +254,7 @@ class Ui_Dialog:
         self.label_top_playlist2_1.setStyleSheet("text-align: left")
         # Label pour indiquer le nombre de streams de cet album :
         self.label_top_playlist2_2 = QtWidgets.QLabel(self.Interface_accueil)
-        self.label_top_playlist2_2.setGeometry(QtCore.QRect(390, 210, 161, 31))
+        self.label_top_playlist2_2.setGeometry(QtCore.QRect(550, 210, 250, 31))
         self.label_top_playlist2_2.setText("")
         self.label_musiques_populaires = QtWidgets.QLabel(self.Interface_accueil)
         self.label_musiques_populaires.setGeometry(QtCore.QRect(250, 245, 300, 31))
@@ -254,15 +277,15 @@ class Ui_Dialog:
         self.pushButton_8.setObjectName("pushButton_8")
         # Label pour le titre de la musique et le nom de l'artiste lié à la musique
         self.label_top_musique1_1 = QtWidgets.QLabel(self.Interface_accueil)
-        self.label_top_musique1_1.setGeometry(QtCore.QRect(250, 365, 200, 80))
+        self.label_top_musique1_1.setGeometry(QtCore.QRect(250, 365, 250, 80))
         self.label_top_musique1_1.setText("")
         # Label pour indiquer le nombre de streams de cette musique :
         self.label_top_musique1_2 = QtWidgets.QLabel(self.Interface_accueil)
-        self.label_top_musique1_2.setGeometry(QtCore.QRect(250, 435, 161, 31))
+        self.label_top_musique1_2.setGeometry(QtCore.QRect(250, 435, 250, 31))
         self.label_top_musique1_2.setText("")
         self.pushButton_9 = QtWidgets.QPushButton(self.Interface_accueil)
         self.pushButton_9.setEnabled(True)
-        self.pushButton_9.setGeometry(QtCore.QRect(390, 275, 80, 80))
+        self.pushButton_9.setGeometry(QtCore.QRect(550, 275, 80, 80))
         self.pushButton_9.setMouseTracking(False)
         self.pushButton_9.setAcceptDrops(False)
         self.pushButton_9.setAutoFillBackground(False)
@@ -274,15 +297,15 @@ class Ui_Dialog:
         self.pushButton_9.setObjectName("pushButton_9")
         # Label pour le titre de la musique et le nom de l'artiste lié à la musique
         self.label_top_musique2_1 = QtWidgets.QLabel(self.Interface_accueil)
-        self.label_top_musique2_1.setGeometry(QtCore.QRect(390, 365, 200, 80))
+        self.label_top_musique2_1.setGeometry(QtCore.QRect(550, 365, 250, 80))
         self.label_top_musique2_1.setText("")
         # Label pour indiquer le nombre de streams de cette musique :
         self.label_top_musique2_2 = QtWidgets.QLabel(self.Interface_accueil)
-        self.label_top_musique2_2.setGeometry(QtCore.QRect(390, 435, 161, 31))
+        self.label_top_musique2_2.setGeometry(QtCore.QRect(550, 435, 250, 31))
         self.label_top_musique2_2.setText("")
         self.pushButton_10 = QtWidgets.QPushButton(self.Interface_accueil)
         self.pushButton_10.setEnabled(True)
-        self.pushButton_10.setGeometry(QtCore.QRect(530, 275, 80, 80))
+        self.pushButton_10.setGeometry(QtCore.QRect(850, 275, 80, 80))
         self.pushButton_10.setMouseTracking(False)
         self.pushButton_10.setAcceptDrops(False)
         self.pushButton_10.setAutoFillBackground(False)
@@ -294,15 +317,15 @@ class Ui_Dialog:
         self.pushButton_10.setObjectName("pushButton_10")
         # Label pour le titre de la musique et le nom de l'artiste lié à la musique
         self.label_top_musique3_1 = QtWidgets.QLabel(self.Interface_accueil)
-        self.label_top_musique3_1.setGeometry(QtCore.QRect(530, 365, 200, 80))
+        self.label_top_musique3_1.setGeometry(QtCore.QRect(850, 365, 250, 80))
         self.label_top_musique3_1.setText("")
         # Label pour indiquer le nombre de streams de cette musique :
         self.label_top_musique3_2 = QtWidgets.QLabel(self.Interface_accueil)
-        self.label_top_musique3_2.setGeometry(QtCore.QRect(530, 435, 161, 31))
+        self.label_top_musique3_2.setGeometry(QtCore.QRect(850, 435, 250, 31))
         self.label_top_musique3_2.setText("")
         self.pushButton_13 = QtWidgets.QPushButton(self.Interface_accueil)
         self.pushButton_13.setEnabled(True)
-        self.pushButton_13.setGeometry(QtCore.QRect(530, 50, 80, 80))
+        self.pushButton_13.setGeometry(QtCore.QRect(850, 50, 80, 80))
         self.pushButton_13.setMouseTracking(False)
         self.pushButton_13.setAcceptDrops(False)
         self.pushButton_13.setAutoFillBackground(False)
@@ -314,7 +337,7 @@ class Ui_Dialog:
         self.pushButton_13.setObjectName("pushButton_13")
         # Label pour le titre de l'album et le nom de l'artiste lié à l'album
         self.label_top_playlist3_1 = QtWidgets.QPushButton(self.Interface_accueil)
-        self.label_top_playlist3_1.setGeometry(QtCore.QRect(530, 140, 200, 80))
+        self.label_top_playlist3_1.setGeometry(QtCore.QRect(850, 140, 250, 80))
         self.label_top_playlist3_1.setCheckable(False)
         self.label_top_playlist3_1.setAutoRepeat(False)
         self.label_top_playlist3_1.setAutoExclusive(False)
@@ -322,7 +345,7 @@ class Ui_Dialog:
         self.label_top_playlist3_1.setStyleSheet("text-align: left")
         # Label pour indiquer le nombre de streams de cet album :
         self.label_top_playlist3_2 = QtWidgets.QLabel(self.Interface_accueil)
-        self.label_top_playlist3_2.setGeometry(QtCore.QRect(530, 210, 161, 31))
+        self.label_top_playlist3_2.setGeometry(QtCore.QRect(850, 210, 250, 31))
         self.label_top_playlist3_2.setText("")
 
         self.label_playlist_personnelle = QtWidgets.QLabel(self.Interface_accueil)
@@ -463,12 +486,12 @@ class Ui_Dialog:
         self.label_cover_2.setObjectName("label_cover_2")
 
         self.pushButton_gauche_2 = QtWidgets.QPushButton(self.Interface_recherche)
-        self.pushButton_gauche_2.setGeometry(QtCore.QRect(40, 470, 51, 22))
+        self.pushButton_gauche_2.setGeometry(QtCore.QRect(40, 500, 51, 22))
         self.pushButton_gauche_2.setText("")
         self.pushButton_gauche_2.setIcon(icon_gauche)
         self.pushButton_gauche_2.setObjectName("pushButton_gauche_2")
         self.pushButton_droite_2 = QtWidgets.QPushButton(self.Interface_recherche)
-        self.pushButton_droite_2.setGeometry(QtCore.QRect(140, 470, 51, 22))
+        self.pushButton_droite_2.setGeometry(QtCore.QRect(140, 500, 51, 22))
         self.pushButton_droite_2.setText("")
         self.pushButton_droite_2.setIcon(icon_droite)
         self.pushButton_droite_2.setObjectName("pushButton_droite_2")
@@ -480,25 +503,47 @@ class Ui_Dialog:
         self.temps_2.setValue(50)
 
         self.volume_2 = QSlider(Qt.Horizontal, self.Interface_recherche)
-        self.volume_2.setGeometry(QtCore.QRect(40, 530, 151, 17))
+        self.volume_2.setGeometry(QtCore.QRect(40, 560, 151, 17))
         self.volume_2.setMinimum(0)
         self.volume_2.setMaximum(100)
         self.volume_2.setValue(50)
 
+        self.label_volume_min_2 = QtWidgets.QLabel(self.Interface_recherche)
+        self.label_volume_min_2.setGeometry(QtCore.QRect(40, 583, 15, 15))
+        self.label_volume_min_2.setPixmap(QtGui.QPixmap(r"support\Interface\volume_min.png"))
+        self.label_volume_min_2.setScaledContents(True)
+        self.label_volume_min_2.setObjectName("label_volume_min_2")
+
+        self.label_volume_max_2 = QtWidgets.QLabel(self.Interface_recherche)
+        self.label_volume_max_2.setGeometry(QtCore.QRect(178, 583, 15, 15))
+        self.label_volume_max_2.setPixmap(QtGui.QPixmap(r"support\Interface\volume_max.png"))
+        self.label_volume_max_2.setScaledContents(True)
+        self.label_volume_max_2.setObjectName("label_volume_max_2")
+
         self.pushButton_pause_2 = QtWidgets.QPushButton(self.Interface_recherche)
-        self.pushButton_pause_2.setGeometry(QtCore.QRect(105, 470, 20, 22))
+        self.pushButton_pause_2.setGeometry(QtCore.QRect(105, 500, 20, 22))
         self.pushButton_pause_2.setText("")
         self.pushButton_pause_2.setIcon(self.icon_pause)
         self.pushButton_pause_2.setObjectName("pushButton_pause_2")
 
         self.pushButton_coeur_2 = QtWidgets.QPushButton(self.Interface_recherche)
-        self.pushButton_coeur_2.setGeometry(QtCore.QRect(99, 500, 31, 22))
+        self.pushButton_coeur_2.setGeometry(QtCore.QRect(99, 530, 31, 22))
         self.pushButton_coeur_2.setText("")
 
         self.pushButton_coeur_2.setIcon(self.icon_coeur_vide)
         self.pushButton_coeur_2.setObjectName("pushButton_coeur_2")
         # Ligne pour enlever les bordures. Voir le commentaire du dessous.
         self.pushButton_coeur_2.setStyleSheet("border-style:outset")
+
+        self.label_temps_21 = QtWidgets.QLabel(self.Interface_recherche)
+        self.label_temps_21.setGeometry(QtCore.QRect(40, 470, 241, 22))
+        self.label_temps_21.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_21.setObjectName("label_temps_21")
+
+        self.label_temps_22 = QtWidgets.QLabel(self.Interface_recherche)
+        self.label_temps_22.setGeometry(QtCore.QRect(160, 470, 241, 22))
+        self.label_temps_22.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_22.setObjectName("label_temps_22")
 
         self.nom_musique_2 = QtWidgets.QLabel(self.Interface_recherche)
         self.nom_musique_2.setGeometry(QtCore.QRect(40, 400, 151, 17))
@@ -621,12 +666,12 @@ class Ui_Dialog:
         self.label_cover_3.setObjectName("label_cover_3")
 
         self.pushButton_gauche_3 = QtWidgets.QPushButton(self.Interface_compte)
-        self.pushButton_gauche_3.setGeometry(QtCore.QRect(40, 470, 51, 22))
+        self.pushButton_gauche_3.setGeometry(QtCore.QRect(40, 500, 51, 22))
         self.pushButton_gauche_3.setText("")
         self.pushButton_gauche_3.setIcon(icon_gauche)
         self.pushButton_gauche_3.setObjectName("pushButton_gauche_3")
         self.pushButton_droite_3 = QtWidgets.QPushButton(self.Interface_compte)
-        self.pushButton_droite_3.setGeometry(QtCore.QRect(140, 470, 51, 22))
+        self.pushButton_droite_3.setGeometry(QtCore.QRect(140, 500, 51, 22))
         self.pushButton_droite_3.setText("")
         self.pushButton_droite_3.setIcon(icon_droite)
         self.pushButton_droite_3.setObjectName("pushButton_droite_3")
@@ -638,25 +683,47 @@ class Ui_Dialog:
         self.temps_3.setValue(50)
 
         self.volume_3 = QSlider(Qt.Horizontal, self.Interface_compte)
-        self.volume_3.setGeometry(QtCore.QRect(40, 530, 151, 17))
+        self.volume_3.setGeometry(QtCore.QRect(40, 560, 151, 17))
         self.volume_3.setMinimum(0)
         self.volume_3.setMaximum(100)
         self.volume_3.setValue(50)
 
+        self.label_volume_min_3 = QtWidgets.QLabel(self.Interface_compte)
+        self.label_volume_min_3.setGeometry(QtCore.QRect(40, 583, 15, 15))
+        self.label_volume_min_3.setPixmap(QtGui.QPixmap(r"support\Interface\volume_min.png"))
+        self.label_volume_min_3.setScaledContents(True)
+        self.label_volume_min_3.setObjectName("label_volume_min_3")
+
+        self.label_volume_max_3 = QtWidgets.QLabel(self.Interface_compte)
+        self.label_volume_max_3.setGeometry(QtCore.QRect(178, 583, 15, 15))
+        self.label_volume_max_3.setPixmap(QtGui.QPixmap(r"support\Interface\volume_max.png"))
+        self.label_volume_max_3.setScaledContents(True)
+        self.label_volume_max_3.setObjectName("label_volume_max_3")
+
         self.pushButton_pause_3 = QtWidgets.QPushButton(self.Interface_compte)
-        self.pushButton_pause_3.setGeometry(QtCore.QRect(105, 470, 20, 22))
+        self.pushButton_pause_3.setGeometry(QtCore.QRect(105, 500, 20, 22))
         self.pushButton_pause_3.setText("")
         self.pushButton_pause_3.setIcon(self.icon_pause)
         self.pushButton_pause_3.setObjectName("pushButton_pause_3")
 
         self.pushButton_coeur_3 = QtWidgets.QPushButton(self.Interface_compte)
-        self.pushButton_coeur_3.setGeometry(QtCore.QRect(99, 500, 31, 22))
+        self.pushButton_coeur_3.setGeometry(QtCore.QRect(99, 530, 31, 22))
         self.pushButton_coeur_3.setText("")
 
         self.pushButton_coeur_3.setIcon(self.icon_coeur_vide)
         self.pushButton_coeur_3.setObjectName("pushButton_coeur_3")
         # Ligne pour enlever les bordures. Voir le commentaire du dessous.
         self.pushButton_coeur_3.setStyleSheet("border-style:outset")
+
+        self.label_temps_31 = QtWidgets.QLabel(self.Interface_compte)
+        self.label_temps_31.setGeometry(QtCore.QRect(40, 470, 241, 22))
+        self.label_temps_31.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_31.setObjectName("label_temps_31")
+
+        self.label_temps_32 = QtWidgets.QLabel(self.Interface_compte)
+        self.label_temps_32.setGeometry(QtCore.QRect(160, 470, 241, 22))
+        self.label_temps_32.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_32.setObjectName("label_temps_32")
 
         self.nom_musique_3 = QtWidgets.QLabel(self.Interface_compte)
         self.nom_musique_3.setGeometry(QtCore.QRect(40, 400, 151, 17))
@@ -719,6 +786,11 @@ class Ui_Dialog:
         self.pushButton_connexion = QtWidgets.QPushButton(self.Interface_connexion)
         self.pushButton_connexion.setGeometry(QtCore.QRect(50, 280, 111, 31))
         self.pushButton_connexion.setObjectName("pushButton_connexion")
+        self.label_probleme_de_connection = QtWidgets.QLabel(self.Interface_connexion)
+        self.label_probleme_de_connection.setGeometry(QtCore.QRect(50, 320, 401, 25))
+        self.label_probleme_de_connection.setObjectName("label_probleme_de_connection")
+        self.label_probleme_de_connection.setStyleSheet("color: rgb(255, 0, 0)")
+        self.label_probleme_de_connection.setFont(QtGui.QFont("Times", 10, QtGui.QFont.Bold))
         self.pushButton_pas_de_compte = QtWidgets.QPushButton(self.Interface_connexion)
         self.pushButton_pas_de_compte.setGeometry(QtCore.QRect(50, 370, 121, 31))
         self.pushButton_pas_de_compte.setObjectName("pushButton_pas_de_compte")
@@ -847,12 +919,12 @@ class Ui_Dialog:
         self.label_cover_4.setObjectName("label_cover_4")
 
         self.pushButton_gauche_4 = QtWidgets.QPushButton(self.Interface_artiste)
-        self.pushButton_gauche_4.setGeometry(QtCore.QRect(40, 470, 51, 22))
+        self.pushButton_gauche_4.setGeometry(QtCore.QRect(40, 500, 51, 22))
         self.pushButton_gauche_4.setText("")
         self.pushButton_gauche_4.setIcon(icon_gauche)
         self.pushButton_gauche_4.setObjectName("pushButton_gauche_4")
         self.pushButton_droite_4 = QtWidgets.QPushButton(self.Interface_artiste)
-        self.pushButton_droite_4.setGeometry(QtCore.QRect(140, 470, 51, 22))
+        self.pushButton_droite_4.setGeometry(QtCore.QRect(140, 500, 51, 22))
         self.pushButton_droite_4.setText("")
         self.pushButton_droite_4.setIcon(icon_droite)
         self.pushButton_droite_4.setObjectName("pushButton_droite_4")
@@ -864,25 +936,47 @@ class Ui_Dialog:
         self.temps_4.setValue(50)
 
         self.volume_4 = QSlider(Qt.Horizontal, self.Interface_artiste)
-        self.volume_4.setGeometry(QtCore.QRect(40, 530, 151, 17))
+        self.volume_4.setGeometry(QtCore.QRect(40, 560, 151, 17))
         self.volume_4.setMinimum(0)
         self.volume_4.setMaximum(100)
         self.volume_4.setValue(50)
 
+        self.label_volume_min_4 = QtWidgets.QLabel(self.Interface_artiste)
+        self.label_volume_min_4.setGeometry(QtCore.QRect(40, 583, 15, 15))
+        self.label_volume_min_4.setPixmap(QtGui.QPixmap(r"support\Interface\volume_min.png"))
+        self.label_volume_min_4.setScaledContents(True)
+        self.label_volume_min_4.setObjectName("label_volume_min_4")
+
+        self.label_volume_max_4 = QtWidgets.QLabel(self.Interface_artiste)
+        self.label_volume_max_4.setGeometry(QtCore.QRect(178, 583, 15, 15))
+        self.label_volume_max_4.setPixmap(QtGui.QPixmap(r"support\Interface\volume_max.png"))
+        self.label_volume_max_4.setScaledContents(True)
+        self.label_volume_max_4.setObjectName("label_volume_max_4")
+
         self.pushButton_pause_4 = QtWidgets.QPushButton(self.Interface_artiste)
-        self.pushButton_pause_4.setGeometry(QtCore.QRect(105, 470, 20, 22))
+        self.pushButton_pause_4.setGeometry(QtCore.QRect(105, 500, 20, 22))
         self.pushButton_pause_4.setText("")
         self.pushButton_pause_4.setIcon(self.icon_pause)
         self.pushButton_pause_4.setObjectName("pushButton_pause_4")
 
         self.pushButton_coeur_4 = QtWidgets.QPushButton(self.Interface_artiste)
-        self.pushButton_coeur_4.setGeometry(QtCore.QRect(99, 500, 31, 22))
+        self.pushButton_coeur_4.setGeometry(QtCore.QRect(99, 530, 31, 22))
         self.pushButton_coeur_4.setText("")
 
         self.pushButton_coeur_4.setIcon(self.icon_coeur_vide)
         self.pushButton_coeur_4.setObjectName("pushButton_coeur_4")
         # Ligne pour enlever les bordures. Voir le commentaire du dessous.
         self.pushButton_coeur_4.setStyleSheet("border-style:outset")
+
+        self.label_temps_41 = QtWidgets.QLabel(self.Interface_artiste)
+        self.label_temps_41.setGeometry(QtCore.QRect(40, 470, 241, 22))
+        self.label_temps_41.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_41.setObjectName("label_temps_41")
+
+        self.label_temps_42 = QtWidgets.QLabel(self.Interface_artiste)
+        self.label_temps_42.setGeometry(QtCore.QRect(160, 470, 241, 22))
+        self.label_temps_42.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_42.setObjectName("label_temps_42")
 
         self.nom_musique_4 = QtWidgets.QLabel(self.Interface_artiste)
         self.nom_musique_4.setGeometry(QtCore.QRect(40, 400, 151, 17))
@@ -1019,12 +1113,12 @@ class Ui_Dialog:
         self.label_cover_5.setObjectName("label_cover_5")
 
         self.pushButton_gauche_5 = QtWidgets.QPushButton(self.Interface_album)
-        self.pushButton_gauche_5.setGeometry(QtCore.QRect(40, 470, 51, 22))
+        self.pushButton_gauche_5.setGeometry(QtCore.QRect(40, 500, 51, 22))
         self.pushButton_gauche_5.setText("")
         self.pushButton_gauche_5.setIcon(icon_gauche)
         self.pushButton_gauche_5.setObjectName("pushButton_gauche_5")
         self.pushButton_droite_5 = QtWidgets.QPushButton(self.Interface_album)
-        self.pushButton_droite_5.setGeometry(QtCore.QRect(140, 470, 51, 22))
+        self.pushButton_droite_5.setGeometry(QtCore.QRect(140, 500, 51, 22))
         self.pushButton_droite_5.setText("")
         self.pushButton_droite_5.setIcon(icon_droite)
         self.pushButton_droite_5.setObjectName("pushButton_droite_5")
@@ -1036,25 +1130,47 @@ class Ui_Dialog:
         self.temps_5.setValue(50)
 
         self.volume_5 = QSlider(Qt.Horizontal, self.Interface_album)
-        self.volume_5.setGeometry(QtCore.QRect(40, 530, 151, 17))
+        self.volume_5.setGeometry(QtCore.QRect(40, 560, 151, 17))
         self.volume_5.setMinimum(0)
         self.volume_5.setMaximum(100)
         self.volume_5.setValue(50)
 
+        self.label_volume_min_5 = QtWidgets.QLabel(self.Interface_album)
+        self.label_volume_min_5.setGeometry(QtCore.QRect(40, 583, 15, 15))
+        self.label_volume_min_5.setPixmap(QtGui.QPixmap(r"support\Interface\volume_min.png"))
+        self.label_volume_min_5.setScaledContents(True)
+        self.label_volume_min_5.setObjectName("label_volume_min_5")
+
+        self.label_volume_max_5 = QtWidgets.QLabel(self.Interface_album)
+        self.label_volume_max_5.setGeometry(QtCore.QRect(178, 583, 15, 15))
+        self.label_volume_max_5.setPixmap(QtGui.QPixmap(r"support\Interface\volume_max.png"))
+        self.label_volume_max_5.setScaledContents(True)
+        self.label_volume_max_5.setObjectName("label_volume_max_5")
+
         self.pushButton_pause_5 = QtWidgets.QPushButton(self.Interface_album)
-        self.pushButton_pause_5.setGeometry(QtCore.QRect(105, 470, 20, 22))
+        self.pushButton_pause_5.setGeometry(QtCore.QRect(105, 500, 20, 22))
         self.pushButton_pause_5.setText("")
         self.pushButton_pause_5.setIcon(self.icon_pause)
         self.pushButton_pause_5.setObjectName("pushButton_pause_5")
 
         self.pushButton_coeur_5 = QtWidgets.QPushButton(self.Interface_album)
-        self.pushButton_coeur_5.setGeometry(QtCore.QRect(99, 500, 31, 22))
+        self.pushButton_coeur_5.setGeometry(QtCore.QRect(99, 530, 31, 22))
         self.pushButton_coeur_5.setText("")
 
         self.pushButton_coeur_5.setIcon(self.icon_coeur_vide)
         self.pushButton_coeur_5.setObjectName("pushButton_coeur_5")
         # Ligne pour enlever les bordures. Voir le commentaire du dessous.
         self.pushButton_coeur_5.setStyleSheet("border-style:outset")
+
+        self.label_temps_51 = QtWidgets.QLabel(self.Interface_album)
+        self.label_temps_51.setGeometry(QtCore.QRect(40, 470, 241, 22))
+        self.label_temps_51.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_51.setObjectName("label_temps_51")
+
+        self.label_temps_52 = QtWidgets.QLabel(self.Interface_album)
+        self.label_temps_52.setGeometry(QtCore.QRect(160, 470, 241, 22))
+        self.label_temps_52.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_temps_52.setObjectName("label_temps_52")
 
         self.nom_musique_5 = QtWidgets.QLabel(self.Interface_album)
         self.nom_musique_5.setGeometry(QtCore.QRect(40, 400, 151, 17))
@@ -1131,6 +1247,9 @@ class Ui_Dialog:
         self.lineEdit_mot_de_passe_5.setObjectName("lineEdit_mot_de_passe_4")
 
         # Pour que les mots de passe ne soient pas visible mais affichés avec des points :
+        self.lineEdit_mot_de_passe_1.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.lineEdit_mot_de_passe_2.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.lineEdit_confirmer_mot_de_passe.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_mot_de_passe_3.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_mot_de_passe_4.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_mot_de_passe_5.setEchoMode(QtWidgets.QLineEdit.Password)
@@ -1183,15 +1302,13 @@ class Ui_Dialog:
         # On cache les boutons que l'on veut pas afficher:
         self.boutton_musique_cache()
 
-        # Si l'on se connecte, on arrive sur la page d'accueil
-        self.pushButton_connexion.clicked.connect(lambda: self.page(0))
         # Si l'on appuie sur le bouton "Pas de compte", on arrive sur la page de création de compte
         self.pushButton_pas_de_compte.clicked.connect(lambda: self.page(4))
         # Si l'on appuie sur annuler, on arrive sur la page de connection
         self.pushButton_annuler.clicked.connect(lambda: self.page(3))
 
         # Si l'on appuie sur le bouton de deconnexion :
-        self.pushButton_14.clicked.connect(lambda: self.page(3))
+        self.pushButton_14.clicked.connect(lambda: self.deconnection())
         # Si l'on appuie sur le bouton modifier le compte
         self.pushButton_modifier_compte.clicked.connect(lambda: self.page(8))
         # Si l'on appuie sur annuler sur la page de modification de compte :
@@ -1328,7 +1445,6 @@ class Ui_Dialog:
         self.checkBox_accepter_les_conditions.setText(_translate("Dialog", "J\'accèpte les conditions d\'utilisation"))
         self.pushButton_creer_compte.setText(_translate("Dialog", "Créer compte "))
         self.pushButton_annuler.setText(_translate("Dialog", "Annuler"))
-        self.lineEdit_mot_de_passe_1.setEchoMode(QtWidgets.QLineEdit.Password)
         self.pushButton_Accueil_4.setText(_translate("Dialog", "Accueil"))
         self.pushButton_Recherche_4.setText(_translate("Dialog", "Recherche"))
         self.pushButton_Compte_4.setText(_translate("Dialog", "Mon compte"))
@@ -1408,6 +1524,8 @@ class Ui_Dialog:
             self.affichage_albums_artiste(artiste)
 
     def page_album(self, album):
+        self.test_musique = False
+
         self.boutton_musique_cache()
 
         self.nom_album.setText(album.nom)
@@ -1417,26 +1535,59 @@ class Ui_Dialog:
         musiques = album.musiques_
         nombre_musiques = len(musiques)
 
+        #On réinitialise les boutons
+        #On est obligé de faire ceci pour utiliser le fonction clicked.disconnect()
+        self.pushButton_musique1.clicked.connect(lambda: print(""))
+        self.pushButton_musique2.clicked.connect(lambda: print(""))
+        self.pushButton_musique3.clicked.connect(lambda: print(""))
+        self.pushButton_musique4.clicked.connect(lambda: print(""))
+        self.pushButton_musique5.clicked.connect(lambda: print(""))
+
         for i in range(nombre_musiques):
             if i == 0:
-                self.pushButton_musique1.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
+                if musiques[i]['stream'] == 1 or musiques[i]['stream'] == 0:
+                    self.pushButton_musique1.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " stream")
+                else:
+                    self.pushButton_musique1.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
                 self.pushButton_musique1.show()
+                #On enlève la dernière fonction connectée au signal pour ne pas poser de problème
+                self.pushButton_musique1.clicked.disconnect()
                 self.pushButton_musique1.clicked.connect(lambda: self.lire_musique(musiques[0]))
             elif i == 1:
-                self.pushButton_musique2.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
+                if musiques[i]['stream'] == 1 or musiques[i]['stream'] == 0:
+                    self.pushButton_musique2.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " stream")
+                else:
+                    self.pushButton_musique2.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
                 self.pushButton_musique2.show()
+                # On enlève la dernière fonction connectée au signal pour ne pas poser de problème
+                self.pushButton_musique2.clicked.disconnect()
                 self.pushButton_musique2.clicked.connect(lambda: self.lire_musique(musiques[1]))
             elif i == 2:
-                self.pushButton_musique3.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
+                if musiques[i]['stream'] == 1 or musiques[i]['stream'] == 0:
+                    self.pushButton_musique3.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " stream")
+                else:
+                    self.pushButton_musique3.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
                 self.pushButton_musique3.show()
+                # On enlève la dernière fonction connectée au signal pour ne pas poser de problème
+                self.pushButton_musique3.clicked.disconnect()
                 self.pushButton_musique3.clicked.connect(lambda: self.lire_musique(musiques[2]))
             elif i == 3:
-                self.pushButton_musique4.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
+                if musiques[i]['stream'] == 1 or musiques[i]['stream'] == 0:
+                    self.pushButton_musique4.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " stream")
+                else:
+                    self.pushButton_musique4.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
                 self.pushButton_musique4.show()
+                # On enlève la dernière fonction connectée au signal pour ne pas poser de problème
+                self.pushButton_musique4.clicked.disconnect()
                 self.pushButton_musique4.clicked.connect(lambda: self.lire_musique(musiques[3]))
             elif i == 4:
-                self.pushButton_musique5.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
+                if musiques[i]['stream'] == 1 or musiques[i]['stream'] == 0:
+                    self.pushButton_musique5.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " stream")
+                else:
+                    self.pushButton_musique5.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " streams")
                 self.pushButton_musique5.show()
+                # On enlève la dernière fonction connectée au signal pour ne pas poser de problème
+                self.pushButton_musique5.clicked.disconnect()
                 self.pushButton_musique5.clicked.connect(lambda: self.lire_musique(musiques[4]))
 
     def cree_compte(self, Dialog):
@@ -1449,24 +1600,22 @@ class Ui_Dialog:
         if self.lineEdit_mot_de_passe_2.text() != self.lineEdit_confirmer_mot_de_passe.text():
             error_dialog = QtWidgets.QErrorMessage(Dialog)
             error_dialog.showMessage('Vos mots de passe ne correspondent pas.')
+            return 0
 
         email = self.lineEdit_adresse_mail_2.text()
         pseudo = self.lineEdit_pseudo.text()
         mot_de_passe = self.lineEdit_mot_de_passe_2.text()
         genre = self.comboBox_genre.currentText()
 
-        print("test avant")
         member = self._member_vue.add_member([email, pseudo, mot_de_passe, genre])
-        print("test après")
+        if member == None:
+            error_dialog = QtWidgets.QErrorMessage(Dialog)
+            error_dialog.showMessage('Cette adresse mail est déjà utilisée')
+            return 0
         if isinstance(member, str):
             error_dialog = QtWidgets.QErrorMessage(Dialog)
             error_dialog.showMessage(member)
-
-        self._member_vue.show_member(member)
-        ####
-        # FAIRE UN TEST POUR PAS DEUX COMPTES IDENTIQUES CAR SÛREMENT PAS GERE ICI
-        ####
-        self._member_vue.show_members()
+        self.page(3)
 
     def set_heart_black(self):
         # Permet de mettre le coeur en noir à chaque nouvelle musique non aimée, c'est un reset en gros
@@ -1489,14 +1638,18 @@ class Ui_Dialog:
     def connection(self):
         # Petit affichage de test :
         self._member_vue.show_members()
+        #Initialisation de la variable de test
+        self.test_musique = True
         # Essaie de connection grâce au controller :
         Membre = self._temp_controller.test_connection(
             [self.lineEdit_adresse_mail_1.text(), self.lineEdit_mot_de_passe_1.text()])
         if Membre == None:
-            print("Nom d'utilisateur ou mot de passe faux")
+            self.label_probleme_de_connection.setText("Nom d'utilisateur ou mot de passe faux")
         else:
+            self.label_probleme_de_connection.setText("")
             self.nom_utilisateur.setText(Membre['pseudo'])
             self.affichage_artistes_preferes()
+            self.page(0)
 
     def rechercher(self):
         # Essaie de recherche grâce au controller :
@@ -1523,25 +1676,7 @@ class Ui_Dialog:
         # Le nom de la musique
         # Et le nom de l'artiste
 
-        self.label_cover_1.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
-        self.nom_musique_1.setText(musique['titre'])
-        self.nom_artiste_1.setText(musique['artiste'])
-
-        self.label_cover_2.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
-        self.nom_musique_2.setText(musique['titre'])
-        self.nom_artiste_2.setText(musique['artiste'])
-
-        self.label_cover_3.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
-        self.nom_musique_3.setText(musique['titre'])
-        self.nom_artiste_3.setText(musique['artiste'])
-
-        self.label_cover_4.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
-        self.nom_musique_4.setText(musique['titre'])
-        self.nom_artiste_4.setText(musique['artiste'])
-
-        self.label_cover_5.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
-        self.nom_musique_5.setText(musique['titre'])
-        self.nom_artiste_5.setText(musique['artiste'])
+        self.cover(chemin_cover_image, musique['titre'], musique['artiste'])
 
     def toogle_etat_musique(self):
         # Si on appuie sur le bouton play ou pause, pour stopper ou redémarrer la musique
@@ -1709,7 +1844,6 @@ class Ui_Dialog:
         if len(top_albums) >= 1:
             self.album_1 = top_albums[0]
             chemin_cover_image = self.album_1['chemin_image']
-            print(self.album_1['nom'], self.album_1['chemin_image'])
             self.pushButton_4.setIcon(QtGui.QIcon(QtGui.QPixmap(r"" + chemin_cover_image)))
             # Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
             self.pushButton_4.setIconSize(QSize(80, 80))
@@ -1724,7 +1858,6 @@ class Ui_Dialog:
         if len(top_albums) >= 2:
             self.album_2 = top_albums[1]
             chemin_cover_image = self.album_2['chemin_image']
-            print(self.album_2['nom'], self.album_2['chemin_image'])
             self.pushButton_5.setIcon(QtGui.QIcon(QtGui.QPixmap(r"" + chemin_cover_image)))
             # Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
             self.pushButton_5.setIconSize(QSize(80, 80))
@@ -1739,7 +1872,6 @@ class Ui_Dialog:
         if len(top_albums) >= 3:
             self.album_3 = top_albums[2]
             chemin_cover_image = self.album_3['chemin_image']
-            print(self.album_3['nom'], self.album_3['chemin_image'])
             self.pushButton_13.setIcon(QtGui.QIcon(QtGui.QPixmap(r"" + chemin_cover_image)))
             # Faire attention, si on change la taille du boutton en haut de changer la taille de l'icon ici (idem pour les autres)
             self.pushButton_13.setIconSize(QSize(80, 80))
@@ -1751,7 +1883,6 @@ class Ui_Dialog:
             self.label_top_playlist3_1.setFont(font)
             streams = str(self.album_3['nombre_ecoutes']) + " streams"
             self.label_top_playlist3_2.setText(streams)
-        print(self._playlist_controller.liste_playlists)
 
     def lecture_musique_top(self, numero_top):
         if numero_top == 1:
@@ -1772,6 +1903,11 @@ class Ui_Dialog:
 
     def lire_musique(self, musique):
 
+        self.test_musique = True
+
+        #On vide le buffer
+        pygame.mixer.music.unload()
+
         ##ATTENTION, pygame.mixer.music.get_pos() est nulle ...
         '''This gets the number of milliseconds that the music has been playing for. The returned time only represents how long the music has been playing; it does not take into account any starting position offsets.'''
         #Je note ici le problème :
@@ -1781,9 +1917,6 @@ class Ui_Dialog:
         #et surtout, le get_pos() retourne seulement le temps que la musique a mis à être écoutée
         #donc avec un set_pos() ça ne prend pas en compte, il faut donc stocker les valeurs...
 
-
-
-
         playlist = list()
         playlist.append(r"" + musique['chemin_musique'])
 
@@ -1791,10 +1924,10 @@ class Ui_Dialog:
         pygame.mixer.music.set_endevent(pygame.USEREVENT)  # On met en place l'évènement lorsque la musique se termine
         pygame.mixer.music.play()  # et on fait play
 
-        ##
-        self._temp_controller.lecture_musique(musique)
         # On actualise l'id :
         self.id = musique['id']
+        ##
+        self._temp_controller.lecture_musique(musique)
         # On actualise le nombre de streams
         self.affichage_top_musiques_stream()
         # On actualise le nombre de streams des albums
@@ -1813,29 +1946,65 @@ class Ui_Dialog:
         audio = mutagen.File(r"" + musique['chemin_musique'])
         self.longueur_son = audio.info.length
 
+        #On initialise les slider et les temps directement pour éviter tout problème d'affichage (comme les calculs se font toutes les 2 secondes)
+
+        self.temps_1.setValue(0)
+        self.label_temps_11.setText("0:00")
+        self.label_temps_12.setText(self.seconde_vers_minutes(self.longueur_son))
+        self.temps_2.setValue(0)
+        self.label_temps_21.setText("0:00")
+        self.label_temps_22.setText(self.seconde_vers_minutes(self.longueur_son))
+        self.temps_3.setValue(0)
+        self.label_temps_31.setText("0:00")
+        self.label_temps_32.setText(self.seconde_vers_minutes(self.longueur_son))
+        self.temps_4.setValue(0)
+        self.label_temps_41.setText("0:00")
+        self.label_temps_42.setText(self.seconde_vers_minutes(self.longueur_son))
+        self.temps_5.setValue(0)
+        self.label_temps_51.setText("0:00")
+        self.label_temps_52.setText(self.seconde_vers_minutes(self.longueur_son))
+
         #variable qui va servir d'avoir une vraie pos (contrairement au get_pos())
         self.position_son = 0
 
         #Tant que la musique est lue :
         #on met à jour les sliders
         #et on crée un event quand la musique se termine
+
         running = True
+
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.USEREVENT:  # Si la musique se finie
                     # On démarre la musique suivante, qui appartient à l'album
-                    return self.changer_musique(1, self.id)
-            if (pygame.mixer.music.get_pos() + int(self.position_son)) % 2000 == 0:
+                    if self.test_musique:
+                        # On vide le buffer
+                        pygame.mixer.music.unload()
+                        self.test_musique = False
+                        return self.changer_musique(1, self.id)
+                    return
+            if (pygame.mixer.music.get_pos() + int(self.position_son)) % 1000 == 0:
                 if self.page_active == 0:
                     self.temps_1.setValue(((pygame.mixer.music.get_pos() + int(self.position_son)) / self.longueur_son * 1 / 10) + 1)
+                    self.label_temps_11.setText(self.seconde_vers_minutes((pygame.mixer.music.get_pos() + int(self.position_son))*1/1000 + 1))
+                    self.label_temps_12.setText(self.seconde_vers_minutes(self.longueur_son))
                 elif self.page_active == 1:
-                    self.temps_2.setValue(pygame.mixer.music.get_pos() / self.longueur_son * 1 / 10)
+                    self.temps_2.setValue(((pygame.mixer.music.get_pos() + int(self.position_son)) / self.longueur_son * 1 / 10) + 1)
+                    self.label_temps_21.setText(self.seconde_vers_minutes((pygame.mixer.music.get_pos() + int(self.position_son)) * 1 / 1000 + 1))
+                    self.label_temps_22.setText(self.seconde_vers_minutes(self.longueur_son))
                 elif self.page_active == 2:
-                    self.temps_3.setValue(pygame.mixer.music.get_pos() / self.longueur_son * 1 / 10)
+                    self.temps_3.setValue(((pygame.mixer.music.get_pos() + int(self.position_son)) / self.longueur_son * 1 / 10) + 1)
+                    self.label_temps_31.setText(self.seconde_vers_minutes((pygame.mixer.music.get_pos() + int(self.position_son)) * 1 / 1000 + 1))
+                    self.label_temps_32.setText(self.seconde_vers_minutes(self.longueur_son))
                 elif self.page_active == 5:
-                    self.temps_4.setValue(pygame.mixer.music.get_pos() / self.longueur_son * 1 / 10)
+                    self.temps_4.setValue(((pygame.mixer.music.get_pos() + int(self.position_son)) / self.longueur_son * 1 / 10) + 1)
+                    self.label_temps_41.setText(self.seconde_vers_minutes((pygame.mixer.music.get_pos() + int(self.position_son)) * 1 / 1000 + 1))
+                    self.label_temps_42.setText(self.seconde_vers_minutes(self.longueur_son))
                 elif self.page_active == 6:
-                    self.temps_5.setValue(pygame.mixer.music.get_pos() / self.longueur_son * 1 / 10)
+                    self.temps_5.setValue(((pygame.mixer.music.get_pos() + int(self.position_son)) / self.longueur_son * 1 / 10) + 1)
+                    self.label_temps_51.setText(self.seconde_vers_minutes((pygame.mixer.music.get_pos() + int(self.position_son)) * 1 / 1000 + 1))
+                    self.label_temps_52.setText(self.seconde_vers_minutes(self.longueur_son))
+        return
 
     def changer_musique(self, test, id):
         if id != None:
@@ -2010,10 +2179,53 @@ class Ui_Dialog:
     # Pour supprimer le compte
     def suppression_de_compte(self):
         self._member_controller.suppression_de_compte(self._temp_controller.retour_user())
-        self.page(3)
+        self.deconnection()
 
     # On initiale le pygame mixer ici
     def initialisation_pygame_mixer(self):
         # initialize pygame.mixer
         pygame.mixer.init(frequency=44100, size=-16, channels=0, buffer=2 ** 12)
         self.channel = pygame.mixer.Channel(0)
+
+    def deconnection(self):
+        self.test_musique = False
+        pygame.mixer.music.stop()
+
+        # On reset à chaque fois qu'on se déconnecte
+        self.reinitialisation_de_laffichage()
+
+        self.page(3)
+
+    def reinitialisation_de_laffichage(self):
+        self.cover("support\Interface\cover.jpg", "", "")
+
+    def cover(self, chemin_cover_image, titre, artiste):
+        self.label_cover_1.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
+        self.nom_musique_1.setText(titre)
+        self.nom_artiste_1.setText(artiste)
+
+        self.label_cover_2.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
+        self.nom_musique_2.setText(titre)
+        self.nom_artiste_2.setText(artiste)
+
+        self.label_cover_3.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
+        self.nom_musique_3.setText(titre)
+        self.nom_artiste_3.setText(artiste)
+
+        self.label_cover_4.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
+        self.nom_musique_4.setText(titre)
+        self.nom_artiste_4.setText(artiste)
+
+        self.label_cover_5.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
+        self.nom_musique_5.setText(titre)
+        self.nom_artiste_5.setText(artiste)
+
+    def seconde_vers_minutes(self, temps_en_seconde):
+        secondes = int(temps_en_seconde)
+        minutes = secondes // 60
+        secondes -= minutes*60
+        if secondes < 10:
+            temps = str(minutes) + ":0" + str(secondes)
+        else:
+            temps = str(minutes) + ":" + str(secondes)
+        return temps

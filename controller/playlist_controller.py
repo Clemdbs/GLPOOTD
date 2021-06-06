@@ -139,9 +139,6 @@ class Playlist():
         for musique_id in musiques_id:
             self.musiques_.append(self._music_controller.get_music(musique_id['id_musique']))
             musiques.append(self._music_controller.get_music(musique_id['id_musique']))
-        #petit test
-        for musique in musiques:
-            print(musique['titre'])
         self.musiques = musiques
         self.top()
 
@@ -174,7 +171,6 @@ class Playlist():
                         max[0] = artiste['nom']
                 top3.append({"nom": max[0], "nombre_likes": max[1]})
                 artistes.remove({"nom": max[0], "nombre_likes": max[1]})
-        print(top3)
         self.top_artistes = top3
 
 
