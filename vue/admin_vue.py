@@ -11,7 +11,8 @@ class Pannel_admin():
         self._music_vue = MusicVue(self._music_controller)
         self._member_vue = MemberVue(self._member_controller)
     def setupUi(self, Dialog):
-        #affichage et boutons de la page musique
+        # Affichage sous Qt
+
         Dialog.setObjectName("Dialog")
         Dialog.resize(1080, 720)
         Dialog.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
@@ -368,6 +369,7 @@ class Pannel_admin():
 
     #creation de la musique / affichage
     def creation_de_musique(self, Dialog):
+        #Crée une musique
         titre = self.lineEdit_14.text()
         artiste = self.lineEdit_13.text()
         album = self.lineEdit_17.text()
@@ -383,6 +385,7 @@ class Pannel_admin():
         self._music_vue.show_music(music)
 
     def supprimer_musique(self):
+        #Supprimer une musique
         titre = self.lineEdit_20.text()
         artiste = self.lineEdit_19.text()
         album = self.lineEdit_23.text()

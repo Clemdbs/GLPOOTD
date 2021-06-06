@@ -3,7 +3,7 @@ from controller.member_controller import MemberController
 from controller.music_controller import MusicController
 from controller.music_like_controller import Music_LikeController
 
-from vue.spythonfy import Ui_Dialog
+from vue.spythonfy import Spythonfy
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     app.setWindowIcon(icon)
 
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog(_member_controller, _music_controller, _music_like_controller)
+    ui = Spythonfy(_member_controller, _music_controller, _music_like_controller)
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

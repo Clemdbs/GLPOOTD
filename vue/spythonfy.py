@@ -1,22 +1,22 @@
 import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QSlider, QApplication
+from PyQt5.QtWidgets import QSlider
 from PyQt5.QtCore import Qt, QSize
 
 from vue.member_vue import MemberVue
 from vue.music_vue import MusicVue
 from vue.music_like_vue import Music_LikeVue
 
-from controller.temp_controller import TempController
+from controller.spythonfy_controller import SpythonfyController
 # Pour la musique
 import pygame
 import mutagen
-import time
 
 
-class Ui_Dialog:
+class Spythonfy:
     def __init__(self, member_controller, music_controller, music_like_controller):
+        #Ici, on prend les différents controller pour faire des demandes de données vers les bases de données
         self._member_controller = member_controller
         self._member_vue = MemberVue(self._member_controller)
 
@@ -26,7 +26,7 @@ class Ui_Dialog:
         self._music_like_controller = music_like_controller
         self._music_like_vue = Music_LikeVue(self._music_like_controller)
 
-        self._temp_controller = TempController(self._member_controller, self._music_controller, self._music_like_controller)
+        self._temp_controller = SpythonfyController(self._member_controller, self._music_controller, self._music_like_controller)
         self._playlist_controller = self._temp_controller._playlist_controller
 
         # Initialiser le pygame (pour le son une nouvelle fois)
@@ -35,6 +35,9 @@ class Ui_Dialog:
         self.initialisation_pygame_mixer()
 
     def setupUi(self, Dialog):
+
+        # Fonction qui gère l'interface graphique avec Qt
+
         self.Dialog = Dialog
         Dialog.setObjectName("Dialog")
         Dialog.resize(1080, 720)
@@ -446,7 +449,7 @@ class Ui_Dialog:
         self.pushButton_rechercher.setGeometry(QtCore.QRect(421, 130, 31, 21))
         self.pushButton = QtWidgets.QPushButton(self.Interface_recherche)
         self.pushButton.setEnabled(True)
-        self.pushButton.setGeometry(QtCore.QRect(260, 200, 80, 71))
+        self.pushButton.setGeometry(QtCore.QRect(260, 350, 80, 71))
         self.pushButton.setMouseTracking(False)
         self.pushButton.setAcceptDrops(False)
         self.pushButton.setAutoFillBackground(False)
@@ -459,7 +462,7 @@ class Ui_Dialog:
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.Interface_recherche)
         self.pushButton_2.setEnabled(True)
-        self.pushButton_2.setGeometry(QtCore.QRect(350, 200, 80, 71))
+        self.pushButton_2.setGeometry(QtCore.QRect(350, 350, 80, 71))
         self.pushButton_2.setMouseTracking(False)
         self.pushButton_2.setAcceptDrops(False)
         self.pushButton_2.setAutoFillBackground(False)
@@ -470,8 +473,15 @@ class Ui_Dialog:
         self.pushButton_2.setDefault(False)
         self.pushButton_2.setFlat(False)
         self.pushButton_2.setObjectName("pushButton_2")
+
+        self.label_probleme_de_recherche = QtWidgets.QLabel(self.Interface_recherche)
+        self.label_probleme_de_recherche.setGeometry(QtCore.QRect(260, 200, 401, 25))
+        self.label_probleme_de_recherche.setObjectName("label_probleme_de_recherche")
+        self.label_probleme_de_recherche.setStyleSheet("color: rgb(255, 0, 0)")
+        self.label_probleme_de_recherche.setFont(QtGui.QFont("Times", 10, QtGui.QFont.Bold))
+
         self.label_rechercher_2 = QtWidgets.QLabel(self.Interface_recherche)
-        self.label_rechercher_2.setGeometry(QtCore.QRect(260, 170, 161, 31))
+        self.label_rechercher_2.setGeometry(QtCore.QRect(260, 320, 161, 31))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -560,7 +570,7 @@ class Ui_Dialog:
         self.nom_artiste_2.setFont(font2)
 
         self.label_rechercher_3 = QtWidgets.QLabel(self.Interface_recherche)
-        self.label_rechercher_3.setGeometry(QtCore.QRect(260, 270, 171, 31))
+        self.label_rechercher_3.setGeometry(QtCore.QRect(260, 420, 171, 31))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -568,7 +578,7 @@ class Ui_Dialog:
         self.label_rechercher_3.setObjectName("label_rechercher_3")
         self.pushButton_3 = QtWidgets.QPushButton(self.Interface_recherche)
         self.pushButton_3.setEnabled(True)
-        self.pushButton_3.setGeometry(QtCore.QRect(260, 300, 80, 71))
+        self.pushButton_3.setGeometry(QtCore.QRect(260, 450, 80, 71))
         self.pushButton_3.setMouseTracking(False)
         self.pushButton_3.setAcceptDrops(False)
         self.pushButton_3.setAutoFillBackground(False)
@@ -581,7 +591,7 @@ class Ui_Dialog:
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_6 = QtWidgets.QPushButton(self.Interface_recherche)
         self.pushButton_6.setEnabled(True)
-        self.pushButton_6.setGeometry(QtCore.QRect(350, 300, 80, 71))
+        self.pushButton_6.setGeometry(QtCore.QRect(350, 450, 80, 71))
         self.pushButton_6.setMouseTracking(False)
         self.pushButton_6.setAcceptDrops(False)
         self.pushButton_6.setAutoFillBackground(False)
@@ -594,7 +604,7 @@ class Ui_Dialog:
         self.pushButton_6.setObjectName("pushButton_6")
         self.pushButton_7 = QtWidgets.QPushButton(self.Interface_recherche)
         self.pushButton_7.setEnabled(True)
-        self.pushButton_7.setGeometry(QtCore.QRect(440, 300, 80, 71))
+        self.pushButton_7.setGeometry(QtCore.QRect(440, 450, 80, 71))
         self.pushButton_7.setMouseTracking(False)
         self.pushButton_7.setAcceptDrops(False)
         self.pushButton_7.setAutoFillBackground(False)
@@ -1398,6 +1408,9 @@ class Ui_Dialog:
         self.pushButton_creer_compte.clicked.connect(lambda: self.cree_compte(self.Interface_creation_compte))
 
     def retranslateUi(self, Dialog):
+
+        #Fonction qui va mettre les textes aux différents items de Qt
+
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Spythonfy"))
         self.pushButton_Accueil_1.setText(_translate("Dialog", "Accueil"))
@@ -1453,6 +1466,7 @@ class Ui_Dialog:
         self.pushButton_Compte_5.setText(_translate("Dialog", "Mon compte"))
 
     def page(self, numero):
+        #Ici, on va switcher entre les différentes pages
         if numero == 0:
             self.page_active = 0
             self.stackedWidget.setCurrentIndex(0)
@@ -1477,6 +1491,7 @@ class Ui_Dialog:
             self.stackedWidget.setCurrentIndex(7)
 
     def page_speciale(self, numero):
+        #On va appeler la fonction page tout en cachant les items à cacher
         self.boutton_album_cache()
         self.page(numero)
 
@@ -1501,10 +1516,12 @@ class Ui_Dialog:
         self.pushButton_musique5.hide()
 
     def page_speciale2(self, numero):
+        # On va appeler la fonction page tout en cachant les items à cacher
         self.boutton_musique_cache()
         self.page(numero)
 
     def page_artiste(self):
+        # On va appeler la fonction page tout en en affichant les albums souhaités
         artiste = self.nom_artiste_1.text()
         if artiste != "":  # Si et seulement si un nom d'artiste est affiché
             self.page_active = 5
@@ -1512,6 +1529,7 @@ class Ui_Dialog:
             self.affichage_albums_artiste(artiste)
 
     def page_artiste_top(self, numero):
+        # On va appeler la fonction page tout en en affichant les albums souhaités
         if numero == 1:
             artiste = self.pushButton_3.text()
         elif numero == 2:
@@ -1524,10 +1542,13 @@ class Ui_Dialog:
             self.affichage_albums_artiste(artiste)
 
     def page_album(self, album):
+        #On remet cette variable à fausse pour pas poser de problème dans la boucle
         self.test_musique = False
 
+        #On cache les items non voulus
         self.boutton_musique_cache()
 
+        #On fixe la page et le nom de l'album
         self.nom_album.setText(album.nom)
         self.page_active = 6
         self.stackedWidget.setCurrentIndex(6)
@@ -1544,6 +1565,8 @@ class Ui_Dialog:
         self.pushButton_musique5.clicked.connect(lambda: print(""))
 
         for i in range(nombre_musiques):
+            #On va mettre les différentes musiques dans des boutons
+            #qui, en cliquant dessus vont être allumées
             if i == 0:
                 if musiques[i]['stream'] == 1 or musiques[i]['stream'] == 0:
                     self.pushButton_musique1.setText(musiques[i]['titre'] + " : " + str(musiques[i]['stream']) + " stream")
@@ -1638,7 +1661,7 @@ class Ui_Dialog:
     def connection(self):
         # Petit affichage de test :
         self._member_vue.show_members()
-        #Initialisation de la variable de test
+        # Initialisation de la variable de test
         self.test_musique = True
         # Essaie de connection grâce au controller :
         Membre = self._temp_controller.test_connection(
@@ -1655,6 +1678,7 @@ class Ui_Dialog:
         # Essaie de recherche grâce au controller :
         Musique_ou_artiste = self._temp_controller.recherche_musique_ou_artiste(self.lineEdit_barre_de_recherche.text())
         if Musique_ou_artiste == None:
+            self.label_probleme_de_recherche.setText("Musique ou artiste non trouvé(e)")
             print("Musique ou artiste non trouvé(e)")
         else:
             # Au début on gère pas encore les différents trucs obtenus
@@ -1776,7 +1800,6 @@ class Ui_Dialog:
         ##
         ## ATTENTION ICI
         ## L'AFFICHAGE DES STREAMS, DU TITRE ET DU NOM DE L ARTISTE PEUVENT DEBORDER
-        ## FAIRE DES TESTS POUR NE PAS DEBORDER !!!!
         ##
         top_musics = self._music_controller.get_top_musics()
         # Tout d'abord on initialise les variables pour ne pas avoir de problème
@@ -1833,7 +1856,6 @@ class Ui_Dialog:
         ##
         ## ATTENTION ICI
         ## L'AFFICHAGE DES STREAMS, DU TITRE ET DU NOM DE L ARTISTE PEUVENT DEBORDER
-        ## FAIRE DES TESTS POUR NE PAS DEBORDER !!!!
         ##
         top_albums = self._playlist_controller.get_top_albums()
         # Tout d'abord on initialise les variables pour ne pas avoir de problème
@@ -1904,6 +1926,9 @@ class Ui_Dialog:
     def lire_musique(self, musique):
 
         self.test_musique = True
+
+        #réinitialiser l'erreur de recherche si elle était présente
+        self.label_probleme_de_recherche.setText("")
 
         #On vide le buffer
         pygame.mixer.music.unload()
@@ -2007,11 +2032,13 @@ class Ui_Dialog:
         return
 
     def changer_musique(self, test, id):
+        # Lire la musique qui suuit
         if id != None:
             musique = self._temp_controller.change_musique(test, id)
             self.lire_musique(musique)
 
     def affichage_albums(self, numero):
+        # Affichage des albums des artistes
         if numero == 1:
             artiste = self.album_1['artiste']
         elif numero == 2:
@@ -2200,6 +2227,8 @@ class Ui_Dialog:
         self.cover("support\Interface\cover.jpg", "", "")
 
     def cover(self, chemin_cover_image, titre, artiste):
+        # Permet de mettre les images aux cover, le titre de la musique et le nom de l'artiste
+
         self.label_cover_1.setPixmap(QtGui.QPixmap(r"" + chemin_cover_image))
         self.nom_musique_1.setText(titre)
         self.nom_artiste_1.setText(artiste)
@@ -2221,6 +2250,7 @@ class Ui_Dialog:
         self.nom_artiste_5.setText(artiste)
 
     def seconde_vers_minutes(self, temps_en_seconde):
+        #Fonction qui converti un temps en secondes, en minute, par exemple, 125 -> 2:05
         secondes = int(temps_en_seconde)
         minutes = secondes // 60
         secondes -= minutes*60

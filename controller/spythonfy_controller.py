@@ -1,7 +1,7 @@
 from controller.playlist_controller import Playlistcontroller
 from controller.session_active_controller import Session
 
-class TempController:
+class SpythonfyController:
     def __init__(self, member_controller, music_controller, music_like_controller):
         #On récupère les 2 controlleurs pour plus de simplicité
         self._session_controller = Session()

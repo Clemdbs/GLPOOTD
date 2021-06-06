@@ -9,7 +9,7 @@ class Playlistcontroller:
         self._music_like_controller = music_like_controller
         self._session_controller = session_controller
         self._music_controller = music_controller
-        self.liste_nom_playliste = ""
+        self.liste_nom_playlist = ""
         self.liste_playlists = []
         self.creation_playlist()
 
@@ -30,7 +30,7 @@ class Playlistcontroller:
             nouvelle_playlist = Playlist(playlist, liste_id_musiques, self._music_controller, "universelle", self._music_like_controller, self._session_controller)
             liste_playlists.append(nouvelle_playlist)
         self.liste_playlists = liste_playlists
-        self.liste_nom_playliste = liste_nom_playlists
+        self.liste_nom_playlist = liste_nom_playlists
 
     def get_playlist_by_musique_id(self, musique_id):
         for playlist in self.liste_playlists:
