@@ -46,7 +46,7 @@ Le nombre de streams des albums est égal à la somme des streams de chaque musi
 
 Côté administrateur :
 
-L'administrateur possède son propre pannel qui possède 5 pages.
+L'administrateur possède son propre panel qui possède 5 pages.
 
 La première page donne la possibilité d'ajouter toutes les musiques d'un coup (fonction qui automatise l'ajout de musique en lisant justement l'arborescence et en ajoutant chacune des musiques avec toutes ses données dans la base de données), ou alors d'ajouter les musiques en rentrant tous les champs nécessaires : titre ; artiste ; album ; type ; chemin de la musique ; chemin de l'image de la cover de l'album.
 
