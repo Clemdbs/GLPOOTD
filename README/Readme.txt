@@ -21,32 +21,28 @@ Pour les installer utilisez : “pip install pygame”
 
 Bon fonctionnement et guide d’utilisation :
 
+En allumant l'application, vous avez la possibilité de vous connecter, ou de créer un compte si cela n'est pas déjà fait (l'adresse email ne doit pas déjà être utilisée par quelqu'un, un test est en place pour le vérifier. De plus, un test est présent pour vérifier si le mot de passe est le bon).
 
-Lorsque vous lancez le projet vous devrez vous connecter. Si vous ne possédez pas de compte vous devrez en créer un. Pourquoi faire ? Pour que tout ce que vous faites sur l’application soit lié à votre compte et dans ce cas vous garderez vos musiques aimées, vos playlist.
+Une fois connecté, vous arrivez sur la page d'accueil. Cette dernière, comme la plupart des pages de l'application, possède la possibilité de naviguer parmis 3 pages sur la gauche : la page d'accueil, la page de recherche ainsi que la page de gestion de compte.
 
+La page d'accueil :
 
-Une fois connectée vous aurez la possibilité de lancer des musiques parmi celles disponibles dans la base de données. 
+Cette page donne la possibilité de naviguer parmi les musiques les plus écoutées / les playlists les plus écoutées / votre playlist likée.
 
+La page de recherche :
 
-Vous pourrez mettre un j’aime sur les musiques que vous préférez afin de les retrouver plus tard dans la rubrique prévu à cet effet (playlist de musiques likées).
+Cette page donne la possibilité de rechercher un artiste ou une musique, mais également de voir les albums de ses artistes préférés. 
 
+La page de gestion de compte :
 
-Vous aurez la possibilité de modifier le volume, ainsi que de naviguer dans la musique au timer que vous souhaitez.
+Cette page offre la possibilité de modifier son compte, c'est-à-dire son mot de passe, ou de le supprimer, mais également de se déconnecter.
 
+Chaque artiste possède sa propre page, avec son image, et ses différents albums. En cliquant sur un album, on peut accéder à ses différentes musiques, et en cliquant sur les boutons de musiques, nous pouvons les écouter.
 
-Des playlists se créent automatiquement en fonction de l’auteur et du nom de l’album quand les musiques sont importées.
+La musique apparaît en bas à gauche. Le titre et l'artiste est noté en dessous de la cover de l'album. De plus, un slider permet de naviguer dans la musique, et un timer dynamique y est présent.
+Le bouton pause permet de mettre en pause la musique, la flèche de droite, de lire la musique suivante dans l'album, celle de gauche, la précédente, et le bouton like permet de mettre la musique dans sa playlist des musiques like (il est possible de la retirer en re-appuyant dessus).
 
-
-Vous aurez aussi la possibilité de changer de mot de passe quand vous serez connecté.
-
-
-Il existe aussi une barre pour rechercher les musiques. On peut les trouver en fonction du nom de la musique et du nom de l’auteur.
-
-
-Il y a la possibilité de supprimer son compte si on le souhaite aussi.
-
-
-La base de données se compose de trois classes: Utilisateurs, musiques et musiques likées.
+Le nombre de streams des albums est égal à la somme des streams de chaque musique de ce dernier et chaque musique possède son propre nombre de streams.
 
 
 Erreur possible : 
