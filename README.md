@@ -61,10 +61,3 @@ La cinquièe page donne la possibilité de voir la base de données liée aux me
 À NOTER :
 
 Les musiques doivent être en format .ogg, chacune des musiques doit être en mono (et non stéréo). De plus, l'arborescence doit être respectée, comme les vidéos le montre dans le dossier README, c'est-à-dire, chaque musique doit être dans le dossier qui porte le nom de l'album, lui-même dans le dossier portant le nom de son artiste. De plus l'image , c'est-à-dire, la cover de l'album doit être dans le même dossier, avec pour format .jpg, et doit-être carrée. De plus, le fichier description.txt ne doit comporter qu'une ligne, sans espace avec le type de musique que l'album comporte.
-
-
-Erreur possible : 
-
-
-En cas d’erreur lors du lancement du projet au niveau des imports il faut supprimer les “blabla” qui corresponde à : “ from blabla.truc import chose”
-Nous avons eu cette erreur et nous nous sommes aperçus que l’IDE considérait ces mots-clefs comme un package et non comme un répertoire comme on le voulait. Ce qui explique l’utilisation de git uniquement pour du versionning projet.
