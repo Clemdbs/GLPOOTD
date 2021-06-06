@@ -19,6 +19,8 @@ Pour les installer utilisez : “pip install pygame”
 
 Bon fonctionnement et guide d’utilisation :
 
+Côté application :
+
 En allumant l'application, vous avez la possibilité de vous connecter, ou de créer un compte si cela n'est pas déjà fait (l'adresse email ne doit pas déjà être utilisée par quelqu'un, un test est en place pour le vérifier. De plus, un test est présent pour vérifier si le mot de passe est le bon).
 
 Une fois connecté, vous arrivez sur la page d'accueil. Cette dernière, comme la plupart des pages de l'application, possède la possibilité de naviguer parmis 3 pages sur la gauche : la page d'accueil, la page de recherche ainsi que la page de gestion de compte.
@@ -41,6 +43,24 @@ La musique apparaît en bas à gauche. Le titre et l'artiste est noté en dessou
 Le bouton pause permet de mettre en pause la musique, la flèche de droite, de lire la musique suivante dans l'album, celle de gauche, la précédente, et le bouton like permet de mettre la musique dans sa playlist des musiques like (il est possible de la retirer en re-appuyant dessus).
 
 Le nombre de streams des albums est égal à la somme des streams de chaque musique de ce dernier et chaque musique possède son propre nombre de streams.
+
+Côté administrateur :
+
+L'administrateur possède son propre panel qui possède 5 pages.
+
+La première page donne la possibilité d'ajouter toutes les musiques d'un coup (fonction qui automatise l'ajout de musique en lisant justement l'arborescence et en ajoutant chacune des musiques avec toutes ses données dans la base de données), ou alors d'ajouter les musiques en rentrant tous les champs nécessaires : titre ; artiste ; album ; type ; chemin de la musique ; chemin de l'image de la cover de l'album.
+
+La deuxième page permet de supprimer toutes les musiques d'un coup ou une seule en rentrant son titre, son artiste et son album.
+
+La troisième page donne la possibilité de voir la base de données liée aux musiques et de rechercher les informations d'une musique en particulier (se fait dans le terminal)
+
+La quatrième page donne la possibilité de supprimer un membre (en rentrant son mail) ou tous les membres d'un coup.
+
+La cinquièe page donne la possibilité de voir la base de données liée aux membres et de rechercher les informations d'un membre en particulier (se fait dans le terminal)
+
+À NOTER :
+
+Les musiques doivent être en format .ogg, chacune des musiques doit être en mono (et non stéréo). De plus, l'arborescence doit être respectée, comme les vidéos le montre dans le dossier README, c'est-à-dire, chaque musique doit être dans le dossier qui porte le nom de l'album, lui-même dans le dossier portant le nom de son artiste. De plus l'image , c'est-à-dire, la cover de l'album doit être dans le même dossier, avec pour format .jpg, et doit-être carrée. De plus, le fichier description.txt ne doit comporter qu'une ligne, sans espace avec le type de musique que l'album comporte.
 
 
 Erreur possible : 
