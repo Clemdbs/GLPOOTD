@@ -64,6 +64,8 @@ Les musiques doivent être en format .ogg, chacune des musiques doit être en mo
 
 Il est OBLIGATOIRE de mettre des musiques dans la base de données pour que le "main.py" se lance. Elles peuvent être ajoutées en lançant le "main_admin.py", puis quand le programme est lancée en cliquant sur Valider en dessous de la ligne "Ajouter toutes les musiques d'un coup", par exemple.
 
+Les boutons de style de musique Rap et Pop ont été laissés mais ne sont pas fonctionnels. Cela aurait pu être une amélioration pour le futur.
+
 
 Erreur possible : 
 
