@@ -31,7 +31,7 @@ Cette page donne la possibilité de naviguer parmi les musiques les plus écout�
 
 La page de recherche :
 
-Cette page donne la possibilité de rechercher un artiste ou une musique, mais également de voir les albums de ses artistes préférés. 
+Cette page donne la possibilité de rechercher un artiste ou une musique, mais également de voir les albums de ses artistes préférés. (en cliquant sur chacun des boutons, il est possible d'accéder à la page associée)
 
 La page de gestion de compte :
 
